@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "865450587311",
+    "project_id": "citymanager-yan",
+    "storage_bucket": "citymanager-yan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:865450587311:android:978f25a88e64472844505a",
+        "android_client_info": {
+          "package_name": "com.example.finalproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj41wkUgHR15vavU8P5i04D7Jq6gznySY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
