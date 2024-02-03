@@ -30,6 +30,7 @@ public class CityManagerControlActivity extends AppCompatActivity implements Vie
     TextView welcome;
     String userEmail;
     ImageView appManager;
+    ImageView addNewMassage;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +38,14 @@ public class CityManagerControlActivity extends AppCompatActivity implements Vie
         setContentView(R.layout.city_manager_control_page);
         back = findViewById(R.id.backButton);
         back.setOnClickListener(this);
+        addNewMassage=findViewById(R.id.addNewMassage);
+        addNewMassage.setOnClickListener(this);
         welcome=findViewById(R.id.welcome);
-        Intent intent=getIntent();
-        userEmail=intent.getStringExtra("user email");
         appManager=findViewById(R.id.appManager);
         appManager.setOnClickListener(this);
+
+        Intent intent=getIntent();
+        userEmail=intent.getStringExtra("user email");
         if(!userEmail.equals("yanrepinyan@gmail.com"))
         {
             appManager.setVisibility(View.INVISIBLE);
@@ -49,7 +53,6 @@ public class CityManagerControlActivity extends AppCompatActivity implements Vie
         else
         {
             appManager.setVisibility(View.VISIBLE);
-
         }
         setUserNameFromData();
 
@@ -62,6 +65,11 @@ public class CityManagerControlActivity extends AppCompatActivity implements Vie
         }
         if (v.getId() == appManager.getId()) {
             Intent i=new Intent(this, AddNewUserActivity.class);
+            i.putExtra("user email",userEmail);
+            startActivity(i);
+        }
+        if (v.getId() == addNewMassage.getId()) {
+            Intent i=new Intent(this, AddNewMessageToCity.class);
             i.putExtra("user email",userEmail);
             startActivity(i);
         }

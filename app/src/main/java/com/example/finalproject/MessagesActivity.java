@@ -58,7 +58,7 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
 
     private void getNewsFromDB()
     {
-        DocumentReference docRef = db.collection("meseges").document(cityLocation);
+        DocumentReference docRef = db.collection("messages").document(cityLocation);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
