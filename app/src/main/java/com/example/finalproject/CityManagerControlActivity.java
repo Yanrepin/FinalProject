@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,13 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class CityManagerControlActivity extends AppCompatActivity implements View.OnClickListener{
@@ -64,7 +60,7 @@ public class CityManagerControlActivity extends AppCompatActivity implements Vie
             finish();
         }
         if (v.getId() == appManager.getId()) {
-            Intent i=new Intent(this, AddNewUserActivity.class);
+            Intent i=new Intent(this, AddOrRemoveUsersActivity.class);
             i.putExtra("user email",userEmail);
             startActivity(i);
         }

@@ -35,7 +35,7 @@
         </activity>
         <activity android:name=".CityManagerLoginActivity"/>
         <activity android:name=".CityManagerControlActivity"/>
-        <activity android:name=".AddNewUserActivity"/>
+        <activity android:name=".AddOrRemoveUsersActivity"/>
         <activity android:name=".InquiriesActivity"/>
         <activity android:name=".MessagesActivity"/>
         <activity android:name=".NewHazardActivity"/>
