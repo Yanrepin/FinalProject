@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.Manifest;
 import android.os.Build;
@@ -29,13 +31,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.UUID;
+
 public class NewHazardActivity extends AppCompatActivity implements View.OnClickListener {
     ImageButton back;
-    private EditText descriptionInput;
-    private EditText nameInput;
-    private ImageView uploadedImage;
+    EditText descriptionInput;
+     EditText nameInput;
+     Button submit;
+    ImageView uploadedImage;
+    TextView date;
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +60,19 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
         back=findViewById(R.id.backButton);
         back.setOnClickListener(this);
 
+        submit=findViewById(R.id.sendNewHazard);
+        submit.setOnClickListener(this);
         descriptionInput = findViewById(R.id.descriptionInput);
         nameInput = findViewById(R.id.nameInput);
         uploadedImage = findViewById(R.id.uploadedImage);
+        date=findViewById(R.id.dateTextView);
+        // Get the current date and time
+        Date currentDate = new Date();
+        // Format the date and time using a specific pattern (optional)
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDateTime = formatter.format(currentDate);
+        date.setText("תאריך: "+formattedDateTime);
+
         ImageButton imageUploadButton = findViewById(R.id.imageUploadButton);
 
         imageUploadButton.setOnClickListener(new View.OnClickListener() {
@@ -63,10 +89,32 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
         {
             finish();
         }
+        else if(v.getId()==submit.getId())
+        {
+
+        }
     }
 
-    // Add this code inside your NewHazardActivity.java
+    private void handleSubmitNewHazard()
+    {
+        // Get the current date and time
+        Date currentDate = new Date();
+        // Format the date and time using a specific pattern (optional)
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = formatter.format(currentDate);
 
+        //if input empty
+        String name=nameInput.getText().toString();
+        String description=descriptionInput.getText().toString();
+        if(description.equals("") || name.equals(""))
+        {
+            Toast.makeText(NewHazardActivity.this, "Invalid input for name/description",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+
+    }
 
 
     private void openImageChooser() {

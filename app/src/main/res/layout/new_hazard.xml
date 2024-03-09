@@ -5,125 +5,127 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/topLayout"
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="false"
-            android:layout_centerHorizontal="false"
-            android:layout_centerVertical="false"
-            android:orientation="horizontal"
-            android:textAlignment="center">
-
-            <ImageButton
-                android:id="@+id/backButton"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:backgroundTint="#97BAB6B6"
-                android:contentDescription="back Button"
-                android:scaleX="0.95"
-                android:src="@drawable/_565454_200" />
-
-            <TextView
-                android:id="@+id/pageName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|center_horizontal|center_vertical"
-                android:text="דיווח על מפגע חדש"
-                android:textAlignment="center"
-                android:textSize="34sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/hazardLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/topLayout"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="50dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:textAlignment="center">
-
-            <TextView
-                android:id="@+id/formTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="נתקלת במפגע חדש?! דווח לנו..."
-                android:textSize="34sp" />
-
-            <EditText
-                android:id="@+id/descriptionInput"
-                android:layout_width="300dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:gravity="top"
-                android:hint="תיאור המפגע"
-                android:inputType="textMultiLine" />
-
-            <EditText
-                android:id="@+id/nameInput"
-                android:layout_width="300dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="16dp"
-                android:hint="שם המדווח"
-                android:inputType="text" />
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/topLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="16dp">
-
-                <!-- Add your image styling here -->
-
-                <ImageView
-                    android:id="@+id/uploadedImage"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#CCCCCC"
-                    app:srcCompat="@android:drawable/ic_menu_gallery" /> <!-- Placeholder background color -->
+                android:textAlignment="center">
 
                 <ImageButton
-                    android:id="@+id/imageUploadButton"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/backButton"
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:backgroundTint="#97BAB6B6"
+                    android:contentDescription="back Button"
+                    android:scaleX="0.95"
+                    android:src="@drawable/_565454_200" />
+
+                <TextView
+                    android:id="@+id/pageName"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:contentDescription="Upload Image"
-                    android:src="@android:drawable/ic_menu_camera" />
+                    android:layout_gravity="center|center_horizontal|center_vertical"
+                    android:text="דיווח על מפגע חדש"
+                    android:textAlignment="center"
+                    android:textSize="34sp" />
             </LinearLayout>
 
-            <!-- Add your image upload widget here -->
+            <LinearLayout
+                android:id="@+id/hazardLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/topLayout"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="50dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:textAlignment="center">
 
-            <TextView
-                android:id="@+id/dateTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="תאריך: "
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/formTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="נתקלת במפגע חדש?! דווח לנו..."
+                    android:textSize="34sp" />
 
-            <!-- You can use a TextView to display the default date -->
+                <EditText
+                    android:id="@+id/descriptionInput"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:gravity="top"
+                    android:hint="תיאור המפגע"
+                    android:inputType="textMultiLine" />
 
-            <!-- Add your submit button or any other controls as needed -->
+                <EditText
+                    android:id="@+id/nameInput"
+                    android:layout_width="300dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="שם המדווח"
+                    android:inputType="text" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <!-- Add your image styling here -->
+
+                    <ImageView
+                        android:id="@+id/uploadedImage"
+                        android:layout_width="300dp"
+                        android:layout_height="300dp"
+                        android:layout_marginTop="8dp"
+                        android:background="#CCCCCC"
+                        app:srcCompat="@android:drawable/ic_menu_gallery" /> <!-- Placeholder background color -->
+
+                    <ImageButton
+                        android:id="@+id/imageUploadButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:contentDescription="Upload Image"
+                        android:src="@android:drawable/ic_menu_camera" />
+                </LinearLayout>
+
+                <!-- Add your image upload widget here -->
+
+                <TextView
+                    android:id="@+id/dateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="תאריך: "
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/sendNewHazard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add New Hazard" />
+
+                <!-- You can use a TextView to display the default date -->
+
+                <!-- Add your submit button or any other controls as needed -->
 
 
+            </LinearLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 
-    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

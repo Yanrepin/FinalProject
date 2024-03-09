@@ -27,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
@@ -114,11 +115,45 @@ public class AddOrRemoveUsersActivity extends AppCompatActivity implements View.
                     Log.w(TAG, "createUserWithEmail:success");
                     FirebaseUser user = mAuth.getCurrentUser();
                     Map<String, Object> emptyData = new HashMap<>();
-                    // Use Firestore's set() method with SetOptions.merge() to create the document
-                    db.collection("hazards").document(city)
-                            .set(emptyData, SetOptions.merge());
-                    db.collection("messages").document(city)
-                            .set(emptyData, SetOptions.merge());
+                    // Use Firestore's get() method to check if the document already exists
+                    DocumentReference hazardDocumentRef = db.collection("hazards").document(city);
+                    DocumentReference messagesDocumentRef = db.collection("messages").document(city);
+
+                    hazardDocumentRef.get().addOnCompleteListener(hazardTask -> {
+                        if (hazardTask.isSuccessful()) {
+                            DocumentSnapshot hazardSnapshot = hazardTask.getResult();
+                            // Check if the document already exists
+                            if (!hazardSnapshot.exists()) {
+                                // Document does not exist, proceed with creating it
+                                hazardDocumentRef.set(emptyData, SetOptions.merge());
+                            }
+                        } else {
+                            // Handle the error
+                            Exception e = hazardTask.getException();
+                            if (e != null) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+                    // Repeat the process for the "messages" collection
+                    messagesDocumentRef.get().addOnCompleteListener(messagesTask -> {
+                        if (messagesTask.isSuccessful()) {
+                            DocumentSnapshot messagesSnapshot = messagesTask.getResult();
+                            // Check if the document already exists
+                            if (!messagesSnapshot.exists()) {
+                                // Document does not exist, proceed with creating it
+                                messagesDocumentRef.set(emptyData, SetOptions.merge());
+                            }
+                        } else {
+                            // Handle the error
+                            Exception e = messagesTask.getException();
+                            if (e != null) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
                     // Create a Map to represent the data you want to add
                     Map<String, Object> userMap = new HashMap<>();
                     userMap.put("city", city);
