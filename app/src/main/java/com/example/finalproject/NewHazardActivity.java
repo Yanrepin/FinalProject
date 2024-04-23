@@ -1,10 +1,15 @@
 package com.example.finalproject;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +24,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.Manifest;
@@ -31,15 +37,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnPausedListener;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageMetadata;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 
-
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 public class NewHazardActivity extends AppCompatActivity implements View.OnClickListener {
@@ -49,6 +66,9 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
      Button submit;
     ImageView uploadedImage;
     TextView date;
+    ImageButton imageUploadButton;
+    ProgressBar progressBar;
+    ImageView checkImg;
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -57,30 +77,32 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_hazard);
+
         back=findViewById(R.id.backButton);
         back.setOnClickListener(this);
 
         submit=findViewById(R.id.sendNewHazard);
         submit.setOnClickListener(this);
+
+        imageUploadButton = findViewById(R.id.imageUploadButton);
+        imageUploadButton.setOnClickListener(this);
+
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
+        checkImg=findViewById(R.id.checkImg);
+        checkImg.setVisibility(View.GONE);
+
         descriptionInput = findViewById(R.id.descriptionInput);
         nameInput = findViewById(R.id.nameInput);
         uploadedImage = findViewById(R.id.uploadedImage);
         date=findViewById(R.id.dateTextView);
+
         // Get the current date and time
         Date currentDate = new Date();
         // Format the date and time using a specific pattern (optional)
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDateTime = formatter.format(currentDate);
         date.setText("תאריך: "+formattedDateTime);
-
-        ImageButton imageUploadButton = findViewById(R.id.imageUploadButton);
-
-        imageUploadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkCameraPermission();
-            }
-        });
     }
 
     @Override
@@ -91,7 +113,11 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
         }
         else if(v.getId()==submit.getId())
         {
-
+            handleSubmitNewHazard();
+        }
+        else if(v.getId()==imageUploadButton.getId())
+        {
+            checkCameraPermission();
         }
     }
 
@@ -112,22 +138,76 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
             return;
         }
 
-
-
+        uploadImageToStorage(uploadedImage,name+currentDate,progressBar,checkImg);
     }
 
 
-    private void openImageChooser() {
-        // Check for camera availability
-
-        if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY)) {
-            dispatchTakePictureIntent();
-        } else {
-            // If no camera available, open gallery
-            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    private void uploadImageToStorage(ImageView uploadedImage , String imgName, ProgressBar progressBar , ImageView checkImg)
+    {
+        if(progressBar!=null)
+        {
+            progressBar.setVisibility(View.VISIBLE);
         }
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        // Create a storage reference from our app
+        StorageReference storageRef = storage.getReference();
+        StorageReference mountainsRef = storageRef.child(imgName+".jpg");
+
+        // Get the data from an ImageView as bytes
+        uploadedImage.setDrawingCacheEnabled(true);
+        uploadedImage.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) uploadedImage.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = mountainsRef.putBytes(data);
+
+        // Listen for state changes, errors, and completion of the upload.
+        uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                Log.d(TAG, "Upload is " + progress + "% done");
+            }
+        }).addOnPausedListener(new OnPausedListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onPaused(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.d(TAG, "Upload is paused");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // Handle successful uploads on complete
+                Log.d(TAG, "Upload is done");
+                if(progressBar!=null)
+                {
+                    progressBar.setVisibility(View.GONE);
+                }
+                if(checkImg!=null)
+                {
+                    checkImg.setVisibility(View.VISIBLE);
+                }
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(checkImg!=null)
+                        {
+                            checkImg.setVisibility(View.GONE);
+                        }
+                    }
+                }, 2000);
+            }
+        });
     }
+
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -159,17 +239,6 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public void onSubmitButtonClicked(View view) {
-        // Retrieve user-entered data
-        String description = descriptionInput.getText().toString();
-        String name = nameInput.getText().toString();
-
-        // TODO: Implement your logic for handling the data (e.g., send it to a server)
-
-        // Display a toast for demonstration purposes
-        String message = "Description: " + description + "\nName: " + name;
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
     private static final int CAMERA_PERMISSION_REQUEST = 100;
 
     private void checkCameraPermission() {
