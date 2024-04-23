@@ -19,7 +19,7 @@ To use the City Manager App, follow these steps:
 3. Build and run the app on an Android device or emulator.
 
 ## Dependencies
-- Firebase SDK: Firebase Authentication and Cloud Firestore Database
+- Firebase SDK: Firebase Authentication , Cloud Firestore Database , Cloud Storage 
 - AndroidX Libraries
 
 ## Usage
