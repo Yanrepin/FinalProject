@@ -153,30 +153,33 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
         uploadImageToStorage(uploadedImage,imgName,progressBar,checkImg);
         saveHazardDetailsInDB(cityLocation,description, name, imgName, String.valueOf(formattedDateTime));
     }
-    private void saveHazardDetailsInDB(String cityOfUser, String details, String name, String imgName,String currentDate) {
-        // Reference to the document where the subcollection will be added
+    private void saveHazardDetailsInDB(String cityOfUser, String details, String name, String imgName, String currentDate) {
+        // Reference to the document where the subcollection will be updated
         DocumentReference docRef = db.collection("hazards").document(cityOfUser);
-        // Create a subcollection reference
-        CollectionReference hazardsSubcollectionRef = docRef.collection(currentDate);
+
         // Create a Map to represent the data for the new hazard
         Map<String, Object> hazardMap = new HashMap<>();
         hazardMap.put("details", details);
         hazardMap.put("name", name);
-        hazardMap.put("imgName", imgName+".jpg");
+        hazardMap.put("imgName", imgName + ".jpg");
         hazardMap.put("status", "open");
 
-        // Add the data to the subcollection
-        hazardsSubcollectionRef.add(hazardMap)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        // Update the data in the document with currentDate as the key
+        Map<String, Object> updateMap = new HashMap<>();
+        updateMap.put(currentDate, hazardMap);
+
+        // Update the document with the new hazard detail
+        docRef.update(updateMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("Firestore", "Document added to subcollection with ID: " + documentReference.getId());
+                    public void onSuccess(Void aVoid) {
+                        Log.d("Firestore", "Document updated with ID: " + currentDate);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w("Firestore", "Error adding document to subcollection", e);
+                        Log.w("Firestore", "Error updating document", e);
                     }
                 });
     }

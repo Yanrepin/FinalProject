@@ -37,7 +37,6 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
     ImageButton back;
     String cityLocation;
     TextView newsForLocation;
-    private Object Firebase;
     ListView newsList;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Spinner spinner;
@@ -60,7 +59,7 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
         // Initialize an array to store document names
         documentNamesList = new ArrayList<>();
         documentNamesList.add("Select other city");
-        getAvialibleSitesNames();
+        getAvialibleCitesNames();
     }
 
     @Override
@@ -71,7 +70,7 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private void getAvialibleSitesNames()
+    private void getAvialibleCitesNames()
     {
         db.collection("messages")
                 .get()

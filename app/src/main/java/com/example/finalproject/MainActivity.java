@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if(v.getId()==allInquiries.getId())
         {
             Intent i=new Intent(this,InquiriesActivity.class);
+            i.putExtra("cityLocation",city);
             startActivity(i);
         }
 
