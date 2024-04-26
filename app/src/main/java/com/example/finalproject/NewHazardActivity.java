@@ -37,10 +37,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnPausedListener;
 import com.google.firebase.storage.OnProgressListener;
@@ -55,6 +61,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
@@ -69,6 +77,7 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
     ImageButton imageUploadButton;
     ProgressBar progressBar;
     ImageView checkImg;
+    String cityLocation;
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -77,6 +86,9 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_hazard);
+
+        Intent intent=getIntent();
+        cityLocation=intent.getStringExtra("cityLocation");
 
         back=findViewById(R.id.backButton);
         back.setOnClickListener(this);
@@ -137,11 +149,39 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
             Toast.makeText(NewHazardActivity.this, "Invalid input for name/description",Toast.LENGTH_SHORT).show();
             return;
         }
+        String imgName=name+formattedDateTime;
+        uploadImageToStorage(uploadedImage,imgName,progressBar,checkImg);
+        saveHazardDetailsInDB(cityLocation,description, name, imgName, String.valueOf(formattedDateTime));
+    }
+    private void saveHazardDetailsInDB(String cityOfUser, String details, String name, String imgName,String currentDate) {
+        // Reference to the document where the subcollection will be added
+        DocumentReference docRef = db.collection("hazards").document(cityOfUser);
+        // Create a subcollection reference
+        CollectionReference hazardsSubcollectionRef = docRef.collection(currentDate);
+        // Create a Map to represent the data for the new hazard
+        Map<String, Object> hazardMap = new HashMap<>();
+        hazardMap.put("details", details);
+        hazardMap.put("name", name);
+        hazardMap.put("imgName", imgName+".jpg");
+        hazardMap.put("status", "open");
 
-        uploadImageToStorage(uploadedImage,name+currentDate,progressBar,checkImg);
+        // Add the data to the subcollection
+        hazardsSubcollectionRef.add(hazardMap)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d("Firestore", "Document added to subcollection with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Firestore", "Error adding document to subcollection", e);
+                    }
+                });
     }
 
-
+    //uploding th img to storage cloud of firebase
     private void uploadImageToStorage(ImageView uploadedImage , String imgName, ProgressBar progressBar , ImageView checkImg)
     {
         if(progressBar!=null)

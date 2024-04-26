@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v.getId()==newHazard.getId())
         {
             Intent i=new Intent(this,NewHazardActivity.class);
+            i.putExtra("cityLocation",city);
             startActivity(i);
         }
         else if(v.getId()==messages.getId())
