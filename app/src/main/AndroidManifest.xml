@@ -41,6 +41,7 @@
         <activity android:name=".NewHazardActivity"/>
         <activity android:name=".AddNewMessageToCity"/>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".ControlPanelForInquiriesActivity"/>
     </application>
 
 </manifest>

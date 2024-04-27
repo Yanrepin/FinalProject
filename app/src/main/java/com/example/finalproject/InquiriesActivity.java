@@ -59,8 +59,6 @@ public class InquiriesActivity extends AppCompatActivity implements View.OnClick
         inquiriesList=findViewById(R.id.inquiriesList);
         getInquiriessFromDB();
 
-        back=findViewById(R.id.backButton);
-        back.setOnClickListener(this);
 
         spinner = findViewById(R.id.spinner);
         // Initialize an array to store document names
@@ -160,7 +158,6 @@ public class InquiriesActivity extends AppCompatActivity implements View.OnClick
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                     if (document.exists()) {
                         Map<String, Object> data = document.getData();
                         List<String> itemList = new ArrayList<>();

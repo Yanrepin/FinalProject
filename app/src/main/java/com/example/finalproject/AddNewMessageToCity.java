@@ -55,7 +55,8 @@ public class AddNewMessageToCity extends AppCompatActivity implements View.OnCli
 
         Intent intent=getIntent();
         userEmail=intent.getStringExtra("user email");
-        getUserCityNameFromData(userEmail);
+        cityOfUser=intent.getStringExtra("user city");
+
 
 
     }
@@ -131,29 +132,7 @@ public class AddNewMessageToCity extends AppCompatActivity implements View.OnCli
         });
     }
 
-    private void getUserCityNameFromData(String userEmail)
-    {
-        DocumentReference docRef = db.collection("users").document(userEmail);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        Map<String, Object> data = document.getData();
-                        if (data.containsKey("name") && data.containsKey("rule") && data.containsKey("city")) {
-                            cityOfUser=data.get("city").toString();
-                        }
-                        Log.d(TAG, "DocumentSnapshot data: " + document.getData().toString());
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
-    }
+
     private void showNotification(String notificationMessage) {
         // Create a notification channel for Android 8.0 (API level 26) and higher
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
