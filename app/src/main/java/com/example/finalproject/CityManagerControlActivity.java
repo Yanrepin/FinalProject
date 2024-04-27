@@ -25,8 +25,11 @@ public class CityManagerControlActivity extends AppCompatActivity implements Vie
     ImageButton back;
     TextView welcome;
     String userEmail;
+    String userCity;
+    String userRule;
     ImageView appManager;
     ImageView addNewMassage;
+    ImageView inquiriesHandler;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,8 @@ public class CityManagerControlActivity extends AppCompatActivity implements Vie
         welcome=findViewById(R.id.welcome);
         appManager=findViewById(R.id.appManager);
         appManager.setOnClickListener(this);
+        inquiriesHandler=findViewById(R.id.inquiriesHandler);
+        inquiriesHandler.setOnClickListener(this);
 
         Intent intent=getIntent();
         userEmail=intent.getStringExtra("user email");
@@ -50,7 +55,7 @@ public class CityManagerControlActivity extends AppCompatActivity implements Vie
         {
             appManager.setVisibility(View.VISIBLE);
         }
-        setUserNameFromData();
+        getUserNameFromData();
 
 
     }
@@ -67,11 +72,21 @@ public class CityManagerControlActivity extends AppCompatActivity implements Vie
         if (v.getId() == addNewMassage.getId()) {
             Intent i=new Intent(this, AddNewMessageToCity.class);
             i.putExtra("user email",userEmail);
+            i.putExtra("user city",userCity);
+            i.putExtra("user rule",userRule);
+            startActivity(i);
+        }
+        if(v.getId()==inquiriesHandler.getId())
+        {
+            Intent i=new Intent(this, ControlPanelForInquiriesActivity.class);
+            i.putExtra("user email",userEmail);
+            i.putExtra("user city",userCity);
+            i.putExtra("user rule",userRule);
             startActivity(i);
         }
     }
 
-    private void setUserNameFromData()
+    private void getUserNameFromData()
     {
         DocumentReference docRef = db.collection("users").document(userEmail);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -82,6 +97,8 @@ public class CityManagerControlActivity extends AppCompatActivity implements Vie
                     if (document.exists()) {
                         Map<String, Object> data = document.getData();
                         if (data.containsKey("name") && data.containsKey("rule") && data.containsKey("city")) {
+                            userCity= (String) data.get("city");
+                            userRule=(String) data.get("rule");
                             welcome.setText("שלום "+data.get("name") + "\nבתפקיד "+data.get("rule")+" בעיר "+data.get("city"));
                         }
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData().toString());

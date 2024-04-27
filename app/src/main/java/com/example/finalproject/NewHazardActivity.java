@@ -169,19 +169,17 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
         updateMap.put(currentDate, hazardMap);
 
         // Update the document with the new hazard detail
-        docRef.update(updateMap)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("Firestore", "Document updated with ID: " + currentDate);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Firestore", "Error updating document", e);
-                    }
-                });
+        docRef.set(updateMap, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("Firestore", "Document updated with ID: " + currentDate);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("Firestore", "Error updating document", e);
+            }
+        });
     }
 
     //uploding th img to storage cloud of firebase
