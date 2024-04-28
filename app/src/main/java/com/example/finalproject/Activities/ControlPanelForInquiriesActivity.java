@@ -125,7 +125,7 @@ public class ControlPanelForInquiriesActivity extends AppCompatActivity implemen
                         }
 
                         // Set up ListView with ArrayAdapter
-                        CustomAdapter adapter = new CustomAdapter(ControlPanelForInquiriesActivity.this, itemList);
+                        CustomAdapter adapter = new CustomAdapter(ControlPanelForInquiriesActivity.this, itemList,cityOfUser);
                         inquiriesList.setAdapter(adapter);
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData().toString());
                     } else {

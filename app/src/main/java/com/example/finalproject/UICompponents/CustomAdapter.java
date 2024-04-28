@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,22 +20,28 @@ import com.example.finalproject.Classes.HazardInfo;
 import com.example.finalproject.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CustomAdapter extends ArrayAdapter<HazardInfo> {
     private Context mContext;
     private List<HazardInfo> mItemList;
+    private String cityOfUser;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-    public CustomAdapter(Context context, List<HazardInfo> itemList) {
+    public CustomAdapter(Context context, List<HazardInfo> itemList, String cityOfUser) {
         super(context, R.layout.custom_list_item, itemList);
         mContext = context;
         mItemList = itemList;
-
-
+        this.cityOfUser=cityOfUser;
     }
 
     @Override
@@ -81,27 +88,62 @@ public class CustomAdapter extends ArrayAdapter<HazardInfo> {
 
         // Populate radio buttons in the radio group
         String[] statuses = {"open", "pending", "closed"};
-        for (String status : statuses) {
+        for (int i = 0; i < statuses.length; i++) {
             RadioButton radioButton = new RadioButton(mContext);
-            radioButton.setText(status);
+            radioButton.setText(statuses[i]);
+            radioButton.setTag(statuses[i]); // Set the status as the tag
             radioGroup.addView(radioButton);
+            // Add OnCheckedChangeListener to each radio button
+            radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        // Retrieve the selected status from the button's tag
+                        String selectedStatus = (String) buttonView.getTag();
+                        Log.d("Status when selected", selectedStatus);
+                        saveHazardDetailsInDB(cityOfUser, hazardInfo.getDetails(), hazardInfo.getName(), hazardInfo.getImageName(), hazardInfo.getFieldName(), selectedStatus);
+                    }
+                }
+            });
         }
 
         // Set the default selected radio button based on hazardInfo.getStatus()
         String currentStatus = hazardInfo.getStatus();
-        switch (currentStatus) {
-            case "open":
-                radioGroup.check(radioGroup.getChildAt(0).getId());
+        for (int i = 0; i < statuses.length; i++) {
+            if (statuses[i].equals(currentStatus)) {
+                radioGroup.check(radioGroup.getChildAt(i).getId());
+                Log.d("Status", currentStatus);
                 break;
-            case "pending":
-                radioGroup.check(radioGroup.getChildAt(1).getId());
-                break;
-            case "closed":
-                radioGroup.check(radioGroup.getChildAt(2).getId());
-                break;
-            default:
-                // Do something if the status is not one of the expected values
+            }
         }
         return listItemView;
+    }
+    private void saveHazardDetailsInDB(String cityOfUser, String details, String name, String imgName, String currentDate, String status) {
+        // Reference to the document where the subcollection will be updated
+        DocumentReference docRef = db.collection("hazards").document(cityOfUser);
+
+        // Create a Map to represent the data for the new hazard
+        Map<String, Object> hazardMap = new HashMap<>();
+        hazardMap.put("details", details);
+        hazardMap.put("name", name);
+        hazardMap.put("imgName", imgName);
+        hazardMap.put("status", status);
+
+        // Update the data in the document with currentDate as the key
+        Map<String, Object> updateMap = new HashMap<>();
+        updateMap.put(currentDate, hazardMap);
+
+        // Update the document with the new hazard detail
+        docRef.set(updateMap, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("Firestore", "Document updated with ID: " + currentDate);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.w("Firestore", "Error updating document", e);
+            }
+        });
     }
 }

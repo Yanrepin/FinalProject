@@ -129,11 +129,11 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
             Toast.makeText(NewHazardActivity.this, "Invalid input for name/description",Toast.LENGTH_SHORT).show();
             return;
         }
-        String imgName=name+formattedDateTime;
+        String imgName=name+formattedDateTime+ ".jpg";
         uploadImageToStorage(uploadedImage,imgName,progressBar,checkImg);
-        saveHazardDetailsInDB(cityLocation,description, name, imgName, String.valueOf(formattedDateTime));
+        saveHazardDetailsInDB(cityLocation,description, name, imgName, formattedDateTime,"open");
     }
-    private void saveHazardDetailsInDB(String cityOfUser, String details, String name, String imgName, String currentDate) {
+    private void saveHazardDetailsInDB(String cityOfUser, String details, String name, String imgName, String currentDate, String status) {
         // Reference to the document where the subcollection will be updated
         DocumentReference docRef = db.collection("hazards").document(cityOfUser);
 
@@ -141,8 +141,8 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
         Map<String, Object> hazardMap = new HashMap<>();
         hazardMap.put("details", details);
         hazardMap.put("name", name);
-        hazardMap.put("imgName", imgName + ".jpg");
-        hazardMap.put("status", "open");
+        hazardMap.put("imgName", imgName);
+        hazardMap.put("status", status);
 
         // Update the data in the document with currentDate as the key
         Map<String, Object> updateMap = new HashMap<>();
@@ -173,7 +173,7 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
         FirebaseStorage storage = FirebaseStorage.getInstance();
         // Create a storage reference from our app
         StorageReference storageRef = storage.getReference();
-        StorageReference mountainsRef = storageRef.child(imgName+".jpg");
+        StorageReference mountainsRef = storageRef.child(imgName);
 
         // Get the data from an ImageView as bytes
         uploadedImage.setDrawingCacheEnabled(true);

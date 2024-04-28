@@ -9,9 +9,6 @@ public class HazardInfo {
     private String details;
     private String status;
     private String imgName;
-    private FirebaseStorage storage;
-    private StorageReference storageRef;
-    private StorageReference imgRef;
 
     public HazardInfo(String fieldName,String name, String details, String status, String imgName) {
         this.fieldName=fieldName;
@@ -19,9 +16,6 @@ public class HazardInfo {
         this.details = details;
         this.status = status;
         this.imgName = imgName;
-        this.storage = FirebaseStorage.getInstance();
-        this.storageRef = storage.getReference();
-        this.imgRef = storageRef.child(imgName);
     }
 
     public String getName() {
@@ -36,10 +30,6 @@ public class HazardInfo {
     public String getImageName() {
         return this.imgName;
     }
-    public StorageReference getImageRef() {
-        return this.imgRef;
-    }
-
     public String getFieldName() {
         return this.fieldName;
     }
