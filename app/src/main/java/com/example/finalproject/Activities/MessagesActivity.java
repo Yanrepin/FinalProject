@@ -1,7 +1,8 @@
-package com.example.finalproject;
+package com.example.finalproject.Activities;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,48 +19,42 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.finalproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class InquiriesActivity extends AppCompatActivity implements View.OnClickListener {
-
+public class MessagesActivity extends AppCompatActivity implements View.OnClickListener {
     ImageButton back;
     String cityLocation;
-    TextView inquiriesForLocation;
-    ListView inquiriesList;
+    TextView newsForLocation;
+    ListView newsList;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Spinner spinner;
     private List<String> documentNamesList = new ArrayList<>();
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.all_inquiries);
+        setContentView(R.layout.messages);
 
         Intent intent=getIntent();
         cityLocation=intent.getStringExtra("cityLocation");
-
-        back = findViewById(R.id.backButton);
+        newsForLocation=findViewById(R.id.newsForLocation);
+        newsForLocation.setText("החדשות הם עבור עיר המיקום הנוכחי שלך: " + cityLocation);
+        newsList=findViewById(R.id.newsList);
+        getNewsFromDB();
+        back=findViewById(R.id.backButton);
         back.setOnClickListener(this);
-        cityLocation=intent.getStringExtra("cityLocation");
-        inquiriesForLocation=findViewById(R.id.inquiriesForLocation);
-        inquiriesForLocation.setText("המפגעים הם עבור עיר המיקום הנוכחי שלך: " + cityLocation);
-
-        inquiriesList=findViewById(R.id.inquiriesList);
-        getInquiriessFromDB();
-
-
         spinner = findViewById(R.id.spinner);
         // Initialize an array to store document names
         documentNamesList = new ArrayList<>();
@@ -69,14 +64,15 @@ public class InquiriesActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == back.getId()) {
+        if(v.getId()==back.getId())
+        {
             finish();
         }
-
     }
+
     private void getAvialibleCitesNames()
     {
-        db.collection("hazards")
+        db.collection("messages")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -87,7 +83,7 @@ public class InquiriesActivity extends AppCompatActivity implements View.OnClick
                             documentNamesList.add(document.getId());
                         }
                         // Create an ArrayAdapter using a string array and a default spinner layout
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(InquiriesActivity.this, android.R.layout.simple_spinner_item, documentNamesList) {
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MessagesActivity.this, android.R.layout.simple_spinner_item, documentNamesList) {
 
                             @Override
                             public View getView(int position, View convertView, ViewGroup parent) {
@@ -131,9 +127,9 @@ public class InquiriesActivity extends AppCompatActivity implements View.OnClick
                                 // You can perform actions based on the selected item
                                 if (!selectedDocument.equals("Select other city")) {
                                     cityLocation=selectedDocument;
-                                    inquiriesForLocation.setText("המפגעים הם עבור עיר המיקום הנוכחי שלך: " + cityLocation);
-                                    getInquiriessFromDB();
-                                }
+                                    newsForLocation.setText("החדשות הם עבור עיר המיקום הנוכחי שלך: " + cityLocation);
+                                    getNewsFromDB();
+                              }
                             }
                             @Override
                             public void onNothingSelected(AdapterView<?> parentView) {
@@ -151,8 +147,9 @@ public class InquiriesActivity extends AppCompatActivity implements View.OnClick
                 });
     }
 
-    private void getInquiriessFromDB() {
-        DocumentReference docRef = db.collection("hazards").document(cityLocation);
+    private void getNewsFromDB()
+    {
+        DocumentReference docRef = db.collection("messages").document(cityLocation);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -165,25 +162,14 @@ public class InquiriesActivity extends AppCompatActivity implements View.OnClick
                         for (Map.Entry<String, Object> entry : data.entrySet()) {
                             String fieldName = entry.getKey();
                             Object value = entry.getValue();
-                            if (value instanceof Map) {
-                                // Cast the value to a Map
-                                Map<String, Object> nestedMap = (Map<String, Object>) value;
-                                // Get the value of the "name" key
-                                Object nameValue = nestedMap.get("name");
-                                Object detailsValue = nestedMap.get("details");
-                                Object statusValue = nestedMap.get("status");
-                                if (nameValue != null && detailsValue!= null && statusValue!= null) {
-                                    // Append data to the list as a string
-                                    String fieldValueString = fieldName + " : " + nameValue.toString() + " opened a new hazard.\n" +
-                                            "Details : "+detailsValue + "\nUpdated Status : "+statusValue;
-                                    itemList.add(fieldValueString);
-                                }
-                            }
+                            // Append data to the list as a string
+                            String fieldValueString = fieldName + " : " + value.toString();
+                            itemList.add(fieldValueString);
                         }
 
                         // Set up ListView with ArrayAdapter
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(InquiriesActivity.this, android.R.layout.simple_list_item_1, itemList);
-                        inquiriesList.setAdapter(adapter);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(MessagesActivity.this, android.R.layout.simple_list_item_1, itemList);
+                        newsList.setAdapter(adapter);
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData().toString());
                     } else {
                         Log.d(TAG, "No such document");

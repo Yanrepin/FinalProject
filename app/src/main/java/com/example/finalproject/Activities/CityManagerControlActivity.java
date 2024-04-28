@@ -1,4 +1,4 @@
-package com.example.finalproject;
+package com.example.finalproject.Activities;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.finalproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -70,7 +71,7 @@ public class CityManagerControlActivity extends AppCompatActivity implements Vie
             startActivity(i);
         }
         if (v.getId() == addNewMassage.getId()) {
-            Intent i=new Intent(this, AddNewMessageToCity.class);
+            Intent i=new Intent(this, AddNewMessageToCityActivity.class);
             i.putExtra("user email",userEmail);
             i.putExtra("user city",userCity);
             i.putExtra("user rule",userRule);

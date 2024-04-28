@@ -1,9 +1,11 @@
-package com.example.finalproject;
+package com.example.finalproject.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.finalproject.R;
 
 public class OpenningActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {

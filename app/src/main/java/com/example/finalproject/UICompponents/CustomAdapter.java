@@ -1,6 +1,9 @@
-package com.example.finalproject;
+package com.example.finalproject.UICompponents;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +15,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
+import com.example.finalproject.Classes.HazardInfo;
+import com.example.finalproject.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -60,14 +64,17 @@ public class CustomAdapter extends ArrayAdapter<HazardInfo> {
         imgRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
-                Glide.with(mContext)
-                        .load(bytes)
-                        .into(imageView);
+                // Convert bytes to Bitmap
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                // Set the bitmap to the ImageView
+                imageView.setImageBitmap(bitmap);
+                Log.d("Firestore", "seccessded to get img");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle any errors
+                Log.d("Firestore", exception.toString());
             }
         });
 
@@ -95,7 +102,6 @@ public class CustomAdapter extends ArrayAdapter<HazardInfo> {
             default:
                 // Do something if the status is not one of the expected values
         }
-
         return listItemView;
     }
 }

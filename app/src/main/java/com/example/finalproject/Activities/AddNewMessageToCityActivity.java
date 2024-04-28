@@ -1,6 +1,4 @@
-package com.example.finalproject;
-
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+package com.example.finalproject.Activities;
 
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
@@ -12,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
+import com.example.finalproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,12 +27,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddNewMessageToCity extends AppCompatActivity implements View.OnClickListener{
+public class AddNewMessageToCityActivity extends AppCompatActivity implements View.OnClickListener{
     ImageButton back;
     String userEmail;
     String cityOfUser;
@@ -108,7 +104,7 @@ public class AddNewMessageToCity extends AppCompatActivity implements View.OnCli
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Log.d("Firestore", "Document successfully updated with new field!"+messageMap);
-                                            Toast.makeText(AddNewMessageToCity.this, "הודעה חדשה נשלחה לתושבי העיר שלך!",
+                                            Toast.makeText(AddNewMessageToCityActivity.this, "הודעה חדשה נשלחה לתושבי העיר שלך!",
                                                     Toast.LENGTH_SHORT).show();
                                             showNotification(messageContext);
                                             message.setText("");
