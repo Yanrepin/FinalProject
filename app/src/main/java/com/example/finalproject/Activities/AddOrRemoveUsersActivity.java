@@ -116,6 +116,7 @@ public class AddOrRemoveUsersActivity extends AppCompatActivity implements View.
                     // Use Firestore's get() method to check if the document already exists
                     DocumentReference hazardDocumentRef = db.collection("hazards").document(city);
                     DocumentReference messagesDocumentRef = db.collection("messages").document(city);
+                    DocumentReference requestsDocumentRef = db.collection("requests").document(city);
 
                     hazardDocumentRef.get().addOnCompleteListener(hazardTask -> {
                         if (hazardTask.isSuccessful()) {
@@ -146,6 +147,23 @@ public class AddOrRemoveUsersActivity extends AppCompatActivity implements View.
                         } else {
                             // Handle the error
                             Exception e = messagesTask.getException();
+                            if (e != null) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    // Repeat the process for the "requests" collection
+                    requestsDocumentRef.get().addOnCompleteListener(requestsTask -> {
+                        if (requestsTask.isSuccessful()) {
+                            DocumentSnapshot requestsTaskSnapshot = requestsTask.getResult();
+                            // Check if the document already exists
+                            if (!requestsTaskSnapshot.exists()) {
+                                // Document does not exist, proceed with creating it
+                                requestsDocumentRef.set(emptyData, SetOptions.merge());
+                            }
+                        } else {
+                            // Handle the error
+                            Exception e = requestsTask.getException();
                             if (e != null) {
                                 e.printStackTrace();
                             }

@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView newHazard;
     ImageView allInquiries;
     ImageView messages;
-    ImageView cityManager;
+    ImageView contactUs;
+    TextView cityManager;
     String city;
 
 
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         messages=findViewById(R.id.addNewMassage);
         allInquiries=findViewById(R.id.allInquiries);
         newHazard=findViewById(R.id.newHazard);
+        contactUs=findViewById(R.id.contactUs);
+        contactUs.setOnClickListener(this);
         allInquiries.setOnClickListener(this);
         newHazard.setOnClickListener(this);
         cityManager.setOnClickListener(this);
@@ -143,6 +146,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         else if(v.getId()==allInquiries.getId())
         {
             Intent i=new Intent(this,InquiriesActivity.class);
+            i.putExtra("cityLocation",city);
+            startActivity(i);
+        }
+        else if(v.getId()==contactUs.getId())
+        {
+            Intent i=new Intent(this,ContactUsActivity.class);
             i.putExtra("cityLocation",city);
             startActivity(i);
         }

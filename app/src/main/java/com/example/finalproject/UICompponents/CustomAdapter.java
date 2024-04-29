@@ -61,7 +61,7 @@ public class CustomAdapter extends ArrayAdapter<HazardInfo> {
         HazardInfo hazardInfo = mItemList.get(position);
 
         // Set data to views
-        textView.setText(hazardInfo.getDetails() +"\n openned by "+hazardInfo.getName() + "\n"+hazardInfo.getFieldName()); // Assuming getName() returns the name field of HazardInfo
+        textView.setText("Hazard:  "+hazardInfo.getDetails() +"\nopenned by "+hazardInfo.getName() + "\n"+hazardInfo.getFieldName()); // Assuming getName() returns the name field of HazardInfo
 
          FirebaseStorage storage=FirebaseStorage.getInstance();
          StorageReference storageRef=storage.getReference();

@@ -72,14 +72,35 @@
                     app:srcCompat="@drawable/minimalist_vintage_line_a4_stationery_paper_document__3_" />
 
                 <ImageView
-                    android:id="@+id/inquiriesHandler"
+                    android:id="@+id/contactUs"
                     android:layout_width="250dp"
                     android:layout_height="200dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:background="#A6B1ABAB"
-                    app:srcCompat="@drawable/minimalist_vintage_line_a4_stationery_paper_document__2_" />
+                    app:srcCompat="@drawable/minimalist_vintage_line_a4_stationery_paper_document" />
+
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/twoSecondButtonsLayout"
+                android:layout_centerHorizontal="true"
+                android:text="בעל תפקיד? " />
+
+            <TextView
+                android:id="@+id/inquiriesHandler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/twoSecondButtonsLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_toLeftOf="@id/textView2"
+                android:layout_weight="1"
+                android:foregroundGravity="bottom"
+                android:text=" לחץ כאן"
+                android:textColor="#306BC6" />
 
         </RelativeLayout>
     </ScrollView>

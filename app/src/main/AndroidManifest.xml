@@ -42,6 +42,7 @@
         <activity android:name=".Activities.AddNewMessageToCityActivity"/>
         <activity android:name=".Activities.MainActivity"/>
         <activity android:name=".Activities.ControlPanelForInquiriesActivity"/>
+        <activity android:name=".Activities.ContactUsActivity"/>
     </application>
 
 </manifest>
