@@ -21,6 +21,13 @@ To use the City Manager App, follow these steps:
 ## Dependencies
 - Firebase SDK: Firebase Authentication , Cloud Firestore Database , Cloud Storage 
 - AndroidX Libraries
+- Java Email API
+- mailtrap.io email server simulation
+
+## Permissions
+- Camera
+- Location
+- Internet
 
 ## Usage
 1. Get messages from your city management.
