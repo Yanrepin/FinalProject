@@ -22,6 +22,7 @@ To use the City Manager App, follow these steps:
 - Firebase SDK: Firebase Authentication , Cloud Firestore Database , Cloud Storage 
 - AndroidX Libraries
 - Java Email API
+- mailtrap.io email server simulation
 
 ## Permissions
 - Camera
