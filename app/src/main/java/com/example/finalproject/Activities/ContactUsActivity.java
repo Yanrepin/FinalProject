@@ -82,7 +82,7 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void sendMail() {
-        String mail="yanrepinyan@gmail.com";
+        String mail=emailMap.get(spinner.getSelectedItem().toString());
         String message="Send by: "+name.getText().toString()+
                 "\nPhone: "+phone.getText().toString()+
                 "\nMessage context: "+details.getText().toString();
