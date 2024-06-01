@@ -110,10 +110,11 @@ public class ControlPanelForInquiriesActivity extends AppCompatActivity implemen
                                 Object detailsValue = nestedMap.get("details");
                                 Object statusValue = nestedMap.get("status");
                                 Object imgNameValue = nestedMap.get("imgName");
-                                if (nameValue != null && detailsValue != null && statusValue != null && imgNameValue != null) {
+                                Object managerInfo=nestedMap.get("managerInfo");
+                                if (nameValue != null && detailsValue != null && statusValue != null && imgNameValue != null && managerInfo!=null) {
                                     // Create HazardInfo object
                                     HazardInfo hazardInfo = new HazardInfo(fieldName,nameValue.toString(), detailsValue.toString(),
-                                            statusValue.toString(), imgNameValue.toString());
+                                            statusValue.toString(), imgNameValue.toString(),managerInfo.toString());
                                     // Append data to the list as a string
                                     if ((statusValue.toString().equals("open") && statusOpenFlag) ||
                                             (statusValue.toString().equals("pending") && statusPendingFlag) ||

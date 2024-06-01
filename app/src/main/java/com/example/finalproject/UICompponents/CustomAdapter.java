@@ -3,6 +3,8 @@ package com.example.finalproject.UICompponents;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,12 +58,33 @@ public class CustomAdapter extends ArrayAdapter<HazardInfo> {
         TextView textView = listItemView.findViewById(R.id.textView);
         ImageView imageView = listItemView.findViewById(R.id.imageView);
         RadioGroup radioGroup = listItemView.findViewById(R.id.radioGroup);
+        TextView managerInfo=listItemView.findViewById(R.id.managerInfo);
 
         // Get the HazardInfo object for this position
         HazardInfo hazardInfo = mItemList.get(position);
 
         // Set data to views
-        textView.setText("Hazard:  "+hazardInfo.getDetails() +"\nopenned by "+hazardInfo.getName() + "\n"+hazardInfo.getFieldName()); // Assuming getName() returns the name field of HazardInfo
+        textView.setText("Hazard:  "+hazardInfo.getDetails() +"\nopenned by "+hazardInfo.getName() + "\n"+hazardInfo.getFieldName()+"\nManager Notes: "+hazardInfo.getManagerInfo()); // Assuming getName() returns the name field of HazardInfo
+
+        managerInfo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not used in this example
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Not used in this example
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Save the input after text has changed
+                String input = s.toString();
+                saveHazardDetailsInDB(cityOfUser, hazardInfo.getDetails(), hazardInfo.getName(), hazardInfo.getImageName(), hazardInfo.getFieldName(), hazardInfo.getStatus(), input);
+            }
+        });
+
 
          FirebaseStorage storage=FirebaseStorage.getInstance();
          StorageReference storageRef=storage.getReference();
@@ -101,7 +124,7 @@ public class CustomAdapter extends ArrayAdapter<HazardInfo> {
                         // Retrieve the selected status from the button's tag
                         String selectedStatus = (String) buttonView.getTag();
                         Log.d("Status when selected", selectedStatus);
-                        saveHazardDetailsInDB(cityOfUser, hazardInfo.getDetails(), hazardInfo.getName(), hazardInfo.getImageName(), hazardInfo.getFieldName(), selectedStatus);
+                        saveHazardDetailsInDB(cityOfUser, hazardInfo.getDetails(), hazardInfo.getName(), hazardInfo.getImageName(), hazardInfo.getFieldName(), selectedStatus,hazardInfo.getManagerInfo());
                     }
                 }
             });
@@ -118,7 +141,7 @@ public class CustomAdapter extends ArrayAdapter<HazardInfo> {
         }
         return listItemView;
     }
-    private void saveHazardDetailsInDB(String cityOfUser, String details, String name, String imgName, String currentDate, String status) {
+    private void saveHazardDetailsInDB(String cityOfUser, String details, String name, String imgName, String currentDate, String status,String managerInfo) {
         // Reference to the document where the subcollection will be updated
         DocumentReference docRef = db.collection("hazards").document(cityOfUser);
 
@@ -128,6 +151,7 @@ public class CustomAdapter extends ArrayAdapter<HazardInfo> {
         hazardMap.put("name", name);
         hazardMap.put("imgName", imgName);
         hazardMap.put("status", status);
+        hazardMap.put("managerInfo",managerInfo);
 
         // Update the data in the document with currentDate as the key
         Map<String, Object> updateMap = new HashMap<>();

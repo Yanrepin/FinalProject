@@ -171,9 +171,17 @@ public class InquiriesActivity extends AppCompatActivity implements View.OnClick
                                 Object nameValue = nestedMap.get("name");
                                 Object detailsValue = nestedMap.get("details");
                                 Object statusValue = nestedMap.get("status");
-                                if (nameValue != null && detailsValue!= null && statusValue!= null) {
+                                Object managerInfo=nestedMap.get("managerInfo");
+                                if (nameValue != null && detailsValue!= null && statusValue!= null && managerInfo!=null) {
                                     // Append data to the list as a string
-                                    String fieldValueString = fieldName + " : " + nameValue.toString() + " opened a new hazard.\n" +
+                                    String fieldValueString = fieldName + " : " + nameValue + " opened a new hazard.\n" +
+                                            "Details : "+detailsValue + "\nUpdated Status : "+statusValue+"\ncity Notes:"+managerInfo;
+                                    itemList.add(fieldValueString);
+                                }
+                                else if(nameValue != null && detailsValue!= null && statusValue!= null)
+                                {
+                                    // Append data to the list as a string
+                                    String fieldValueString = fieldName + " : " + nameValue + " opened a new hazard.\n" +
                                             "Details : "+detailsValue + "\nUpdated Status : "+statusValue;
                                     itemList.add(fieldValueString);
                                 }

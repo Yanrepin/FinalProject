@@ -9,13 +9,15 @@ public class HazardInfo {
     private String details;
     private String status;
     private String imgName;
+    private String managerInfo;
 
-    public HazardInfo(String fieldName,String name, String details, String status, String imgName) {
+    public HazardInfo(String fieldName,String name, String details, String status, String imgName,String managerInfo) {
         this.fieldName=fieldName;
         this.name = name;
         this.details = details;
         this.status = status;
         this.imgName = imgName;
+        this.managerInfo=managerInfo;
     }
 
     public String getName() {
@@ -33,5 +35,6 @@ public class HazardInfo {
     public String getFieldName() {
         return this.fieldName;
     }
+    public String getManagerInfo(){return this.managerInfo;}
 
 }

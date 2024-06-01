@@ -40,6 +40,16 @@
         </LinearLayout>
 
 
+        <EditText
+            android:id="@+id/managerInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:hint="update city management notes"
+            android:inputType="text"
+            android:orientation="horizontal"
+            android:weightSum="4" />
+
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"

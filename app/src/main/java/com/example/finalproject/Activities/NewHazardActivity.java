@@ -143,6 +143,7 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
         hazardMap.put("name", name);
         hazardMap.put("imgName", imgName);
         hazardMap.put("status", status);
+        hazardMap.put("managerInfo","");
 
         // Update the data in the document with currentDate as the key
         Map<String, Object> updateMap = new HashMap<>();
@@ -214,6 +215,8 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
                 if(checkImg!=null)
                 {
                     checkImg.setVisibility(View.VISIBLE);
+                    Toast.makeText(NewHazardActivity.this, "New Hazard is sent to the city management", Toast.LENGTH_SHORT).show();
+
                 }
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
