@@ -59,23 +59,42 @@
                     android:text="נתקלת במפגע חדש?! דווח לנו..."
                     android:textSize="34sp" />
 
-                <EditText
-                    android:id="@+id/descriptionInput"
-                    android:layout_width="300dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:gravity="top"
-                    android:hint="תיאור המפגע"
-                    android:inputType="textMultiLine" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/nameInput"
-                    android:layout_width="300dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="16dp"
-                    android:hint="שם המדווח"
-                    android:inputType="text" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/descriptionInput"
+                        android:layout_width="300dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:gravity="top"
+                        android:hint="תיאור המפגע"
+                        android:inputType="textMultiLine"
+                        android:layout_marginTop="20dp"
+                        android:layout_gravity="center_horizontal"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nameInput"
+                        android:layout_width="300dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:gravity="top"
+                        android:hint="שם המדווח"
+                        android:inputType="text"
+                        android:layout_marginTop="16dp"
+                        android:layout_gravity="center_horizontal"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -97,6 +116,7 @@
                         android:id="@+id/imageUploadButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginTop="8dp"
                         android:contentDescription="Upload Image"
                         android:src="@android:drawable/ic_menu_camera" />
@@ -111,12 +131,6 @@
                     android:layout_marginTop="16dp"
                     android:text="תאריך: "
                     android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/sendNewHazard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Add New Hazard" />
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -134,6 +148,12 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     app:srcCompat="@android:drawable/checkbox_on_background" />
+
+                <Button
+                    android:id="@+id/sendNewHazard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add New Hazard" />
 
                 <!-- You can use a TextView to display the default date -->
 
