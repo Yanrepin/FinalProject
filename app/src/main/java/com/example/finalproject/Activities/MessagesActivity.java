@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MessagesActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageButton back;
+
     String cityLocation;
     TextView newsForLocation;
     ListView newsList;
@@ -50,11 +50,10 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
         Intent intent=getIntent();
         cityLocation=intent.getStringExtra("cityLocation");
         newsForLocation=findViewById(R.id.newsForLocation);
-        newsForLocation.setText("החדשות הם עבור עיר המיקום הנוכחי שלך: " + cityLocation);
+        newsForLocation.setText("The messages is due to your current location: " + cityLocation);
         newsList=findViewById(R.id.newsList);
         getNewsFromDB();
-        back=findViewById(R.id.backButton);
-        back.setOnClickListener(this);
+
         spinner = findViewById(R.id.spinner);
         // Initialize an array to store document names
         documentNamesList = new ArrayList<>();
@@ -64,10 +63,7 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==back.getId())
-        {
-            finish();
-        }
+
     }
 
     private void getAvialibleCitesNames()
@@ -127,7 +123,7 @@ public class MessagesActivity extends AppCompatActivity implements View.OnClickL
                                 // You can perform actions based on the selected item
                                 if (!selectedDocument.equals("Select other city")) {
                                     cityLocation=selectedDocument;
-                                    newsForLocation.setText("החדשות הם עבור עיר המיקום הנוכחי שלך: " + cityLocation);
+                                    newsForLocation.setText("The messages is due to your current location: " + cityLocation);
                                     getNewsFromDB();
                               }
                             }

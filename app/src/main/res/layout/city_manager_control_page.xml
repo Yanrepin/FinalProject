@@ -17,31 +17,9 @@
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
-            android:id="@+id/topBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="false"
-            android:layout_centerHorizontal="false"
-            android:layout_centerVertical="false"
-            android:orientation="horizontal"
-            android:textAlignment="center">
-
-            <ImageButton
-                android:id="@+id/backButton"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:backgroundTint="#97BAB6B6"
-                android:contentDescription="back Button"
-                android:scaleX="0.95"
-                android:src="@drawable/_565454_200" />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/controlLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/topBarLayout"
             android:layout_marginTop="50dp"
             android:orientation="vertical">
 
@@ -50,7 +28,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="שלום "
+                android:text="Hi "
                 android:textAlignment="center"
                 android:textSize="24sp" />
 

@@ -24,18 +24,7 @@
             android:layout_centerHorizontal="false"
             android:layout_centerVertical="false"
             android:orientation="horizontal"
-            android:textAlignment="center">
-
-            <ImageButton
-                android:id="@+id/backButton"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:backgroundTint="#97BAB6B6"
-                android:contentDescription="back Button"
-                android:scaleX="0.95"
-                android:src="@drawable/_565454_200" />
-
-        </LinearLayout>
+            android:textAlignment="center"/>
 
         <LinearLayout
             android:id="@+id/MassageLayout"
@@ -51,14 +40,14 @@
                 android:layout_height="400dp"
                 android:ems="10"
                 android:gravity="start|top"
-                android:hint="הכנס הודעה חדשה לעיר שלך"
+                android:hint="New message content"
                 android:inputType="text|textAutoCorrect|textMultiLine" />
 
             <Button
                 android:id="@+id/submitMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="הוסף הודעה" />
+                android:text="Submit new message" />
         </LinearLayout>
 
     </RelativeLayout>

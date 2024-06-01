@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddNewMessageToCityActivity extends AppCompatActivity implements View.OnClickListener{
-    ImageButton back;
+
     String userEmail;
     String cityOfUser;
     TextView message;
@@ -43,10 +43,8 @@ public class AddNewMessageToCityActivity extends AppCompatActivity implements Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_new_massage_to_city);
-        back = findViewById(R.id.backButton);
         message=findViewById(R.id.newMessage);
         addMessage=findViewById(R.id.submitMessage);
-        back.setOnClickListener(this);
         addMessage.setOnClickListener(this);
 
         Intent intent=getIntent();
@@ -58,9 +56,7 @@ public class AddNewMessageToCityActivity extends AppCompatActivity implements Vi
     }
     @Override
     public void onClick(View v) {
-        if (v.getId() == back.getId()) {
-            finish();
-        }
+
         if (v.getId() == addMessage.getId() && !message.getText().toString().equals("")) {
             addMessage(message.getText().toString());
         }
@@ -104,7 +100,7 @@ public class AddNewMessageToCityActivity extends AppCompatActivity implements Vi
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Log.d("Firestore", "Document successfully updated with new field!"+messageMap);
-                                            Toast.makeText(AddNewMessageToCityActivity.this, "הודעה חדשה נשלחה לתושבי העיר שלך!",
+                                            Toast.makeText(AddNewMessageToCityActivity.this, "New Message sent to your city citizens!",
                                                     Toast.LENGTH_SHORT).show();
                                             showNotification(messageContext);
                                             message.setText("");

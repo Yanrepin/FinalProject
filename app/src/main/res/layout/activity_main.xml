@@ -13,8 +13,7 @@
         <RelativeLayout
             android:id="@+id/RelatedLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/userLocation"
@@ -88,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/twoSecondButtonsLayout"
                 android:layout_centerHorizontal="true"
-                android:text="בעל תפקיד? " />
+                android:text="admin?" />
 
             <TextView
                 android:id="@+id/inquiriesHandler"
@@ -96,10 +95,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/twoSecondButtonsLayout"
                 android:layout_centerHorizontal="true"
-                android:layout_toLeftOf="@id/textView2"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/textView2"
                 android:layout_weight="1"
                 android:foregroundGravity="bottom"
-                android:text=" לחץ כאן"
+                android:text="sign in"
                 android:textColor="#306BC6" />
 
         </RelativeLayout>

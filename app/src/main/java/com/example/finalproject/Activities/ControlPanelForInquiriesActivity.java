@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ControlPanelForInquiriesActivity extends AppCompatActivity implements View.OnClickListener{
-    ImageButton back;
     String cityOfUser;
     String userEmail;
     TextView inquiriesForControl;
@@ -52,12 +51,10 @@ public class ControlPanelForInquiriesActivity extends AppCompatActivity implemen
         cityOfUser=intent.getStringExtra("user city");
 
         inquiriesForControl=findViewById(R.id.inquiriesForControl);
-        inquiriesForControl.setText("המפגעים הם עבור עיר הניהול שלך: " + cityOfUser);
+        inquiriesForControl.setText("Your city inquiries: " + cityOfUser);
 
         inquiriesList=findViewById(R.id.inquiriesList);
 
-        back=findViewById(R.id.backButton);
-        back.setOnClickListener(this);
 
         statusOpen=findViewById(R.id.statusOpen);
         statusOpen.setOnClickListener(this);
@@ -71,10 +68,8 @@ public class ControlPanelForInquiriesActivity extends AppCompatActivity implemen
     }
     @Override
     public void onClick(View v) {
-        if (v.getId() == back.getId()) {
-            finish();
-        }
-        else if (v.getId() == statusOpen.getId()) {
+
+        if (v.getId() == statusOpen.getId()) {
             statusOpenFlag=!statusOpenFlag;
             getInquiriessFromDB( cityOfUser , statusOpenFlag, statusPendingFlag, statusClosedFlag);
         }

@@ -17,31 +17,9 @@
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
-            android:id="@+id/topBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="false"
-            android:layout_centerHorizontal="false"
-            android:layout_centerVertical="false"
-            android:orientation="horizontal"
-            android:textAlignment="center">
-
-            <ImageButton
-                android:id="@+id/backButton"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:backgroundTint="#97BAB6B6"
-                android:contentDescription="back Button"
-                android:scaleX="0.95"
-                android:src="@drawable/_565454_200" />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/controlLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/topBarLayout"
             android:layout_marginTop="50dp"
             android:orientation="vertical">
 
@@ -50,7 +28,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="כניסה לאזור מנהל העיר"
+                android:text="Enter city manager panel"
                 android:textAlignment="center"
                 android:textSize="24sp" />
 
@@ -66,8 +44,7 @@
                     android:layout_marginTop="30dp"
                     android:ems="10"
                     android:hint="E-mail"
-                    android:inputType="textEmailAddress"
-                    />
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -83,8 +60,7 @@
                     android:layout_marginTop="50dp"
                     android:ems="10"
                     android:hint="Password"
-                    android:inputType="textPassword"
-                />
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button

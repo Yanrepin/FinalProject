@@ -34,7 +34,6 @@ import java.util.Map;
 
 public class InquiriesActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageButton back;
     String cityLocation;
     TextView inquiriesForLocation;
     ListView inquiriesList;
@@ -49,11 +48,10 @@ public class InquiriesActivity extends AppCompatActivity implements View.OnClick
         Intent intent=getIntent();
         cityLocation=intent.getStringExtra("cityLocation");
 
-        back = findViewById(R.id.backButton);
-        back.setOnClickListener(this);
+
         cityLocation=intent.getStringExtra("cityLocation");
         inquiriesForLocation=findViewById(R.id.inquiriesForLocation);
-        inquiriesForLocation.setText("המפגעים הם עבור עיר המיקום הנוכחי שלך: " + cityLocation);
+        inquiriesForLocation.setText("The Inquiries is due to your current location: " + cityLocation);
 
         inquiriesList=findViewById(R.id.inquiriesList);
         getInquiriessFromDB();
@@ -68,9 +66,7 @@ public class InquiriesActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == back.getId()) {
-            finish();
-        }
+
 
     }
     private void getAvialibleCitesNames()
@@ -130,7 +126,7 @@ public class InquiriesActivity extends AppCompatActivity implements View.OnClick
                                 // You can perform actions based on the selected item
                                 if (!selectedDocument.equals("Select other city")) {
                                     cityLocation=selectedDocument;
-                                    inquiriesForLocation.setText("המפגעים הם עבור עיר המיקום הנוכחי שלך: " + cityLocation);
+                                    inquiriesForLocation.setText("The Inquiries is due to your current location: " + cityLocation);
                                     getInquiriessFromDB();
                                 }
                             }

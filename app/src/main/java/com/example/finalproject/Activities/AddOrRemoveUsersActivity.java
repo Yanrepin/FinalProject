@@ -36,7 +36,6 @@ import java.util.regex.Pattern;
 
 
 public class AddOrRemoveUsersActivity extends AppCompatActivity implements View.OnClickListener{
-    ImageButton back;
     String userEmail;
     FirebaseAuth mAuth;
     TextView emailInput;
@@ -53,8 +52,7 @@ public class AddOrRemoveUsersActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_remove_user);
 
-        back = findViewById(R.id.backButton);
-        back.setOnClickListener(this);
+
         Intent intent=getIntent();
         userEmail=intent.getStringExtra("user email");
         emailInput=findViewById(R.id.addNewUserEmailInput);
@@ -68,9 +66,7 @@ public class AddOrRemoveUsersActivity extends AppCompatActivity implements View.
     }
     @Override
     public void onClick(View v) {
-        if (v.getId() == back.getId()) {
-            finish();
-        }
+
         if (v.getId() == add.getId()) {
             String validResult=inputCheck(emailInput.getText().toString(),passInput.getText().toString());
             if(!inputCheck(emailInput.getText().toString(),passInput.getText().toString()).equals(""))
@@ -181,7 +177,7 @@ public class AddOrRemoveUsersActivity extends AppCompatActivity implements View.
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Log.d("Firestore", "Document successfully updated with new field!"+userMap);
-                                Toast.makeText(AddOrRemoveUsersActivity.this, "נוצר יוזר חדש בהצלחה!",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AddOrRemoveUsersActivity.this, "New user is created!",Toast.LENGTH_SHORT).show();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -195,7 +191,7 @@ public class AddOrRemoveUsersActivity extends AppCompatActivity implements View.
                 {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                    Toast.makeText(AddOrRemoveUsersActivity.this, "יוזר זה כבר קיים!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddOrRemoveUsersActivity.this, "User already exists!",Toast.LENGTH_SHORT).show();
 
                 }
             }

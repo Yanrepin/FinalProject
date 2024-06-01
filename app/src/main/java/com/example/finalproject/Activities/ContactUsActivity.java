@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ContactUsActivity extends AppCompatActivity implements View.OnClickListener{
-    ImageButton back;
     String cityLocation;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Spinner spinner;
@@ -51,8 +50,7 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
         Intent intent=getIntent();
         cityLocation = intent.getStringExtra("cityLocation");
 
-        back=findViewById(R.id.backButton);
-        back.setOnClickListener(this);
+
         spinner = findViewById(R.id.spinner);
         // Initialize an array to store document names
         documentNamesList = new ArrayList<>();
@@ -71,11 +69,8 @@ public class ContactUsActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==back.getId())
-        {
-            finish();
-        }
-        else if(v.getId()==submit.getId() && inputCheck(name.getText().toString(), phone.getText().toString(), details.getText().toString()))
+
+        if(v.getId()==submit.getId() && inputCheck(name.getText().toString(), phone.getText().toString(), details.getText().toString()))
         {
             sendMail();
         }

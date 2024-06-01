@@ -48,7 +48,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NewHazardActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageButton back;
+
     EditText descriptionInput;
      EditText nameInput;
      Button submit;
@@ -70,8 +70,7 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
         Intent intent=getIntent();
         cityLocation=intent.getStringExtra("cityLocation");
 
-        back=findViewById(R.id.backButton);
-        back.setOnClickListener(this);
+
 
         submit=findViewById(R.id.sendNewHazard);
         submit.setOnClickListener(this);
@@ -94,16 +93,12 @@ public class NewHazardActivity extends AppCompatActivity implements View.OnClick
         // Format the date and time using a specific pattern (optional)
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDateTime = formatter.format(currentDate);
-        date.setText("תאריך: "+formattedDateTime);
+        date.setText("Date: "+formattedDateTime);
     }
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==back.getId())
-        {
-            finish();
-        }
-        else if(v.getId()==submit.getId())
+        if(v.getId()==submit.getId())
         {
             handleSubmitNewHazard();
         }

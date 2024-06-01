@@ -23,7 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Map;
 
 public class CityManagerControlActivity extends AppCompatActivity implements View.OnClickListener{
-    ImageButton back;
+
     TextView welcome;
     String userEmail;
     String userCity;
@@ -36,8 +36,7 @@ public class CityManagerControlActivity extends AppCompatActivity implements Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.city_manager_control_page);
-        back = findViewById(R.id.backButton);
-        back.setOnClickListener(this);
+
         addNewMassage=findViewById(R.id.addNewMassage);
         addNewMassage.setOnClickListener(this);
         welcome=findViewById(R.id.welcome);
@@ -62,9 +61,7 @@ public class CityManagerControlActivity extends AppCompatActivity implements Vie
     }
     @Override
     public void onClick(View v) {
-        if (v.getId() == back.getId()) {
-            finish();
-        }
+
         if (v.getId() == appManager.getId()) {
             Intent i=new Intent(this, AddOrRemoveUsersActivity.class);
             i.putExtra("user email",userEmail);
@@ -100,7 +97,7 @@ public class CityManagerControlActivity extends AppCompatActivity implements Vie
                         if (data.containsKey("name") && data.containsKey("rule") && data.containsKey("city")) {
                             userCity= (String) data.get("city");
                             userRule=(String) data.get("rule");
-                            welcome.setText("שלום "+data.get("name") + "\nבתפקיד "+data.get("rule")+" בעיר "+data.get("city"));
+                            welcome.setText("Hi  "+data.get("name") + "\nIn rule "+data.get("rule")+" of city "+data.get("city"));
                         }
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData().toString());
                     } else {

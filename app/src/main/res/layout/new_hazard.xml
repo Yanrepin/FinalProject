@@ -21,15 +21,6 @@
                 android:orientation="horizontal"
                 android:textAlignment="center">
 
-                <ImageButton
-                    android:id="@+id/backButton"
-                    android:layout_width="150dp"
-                    android:layout_height="100dp"
-                    android:backgroundTint="#97BAB6B6"
-                    android:contentDescription="back Button"
-                    android:scaleX="0.95"
-                    android:src="@drawable/_565454_200" />
-
                 <TextView
                     android:id="@+id/pageName"
                     android:layout_width="match_parent"
@@ -56,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="נתקלת במפגע חדש?! דווח לנו..."
+                    android:text="Found new hazard?! please report us..."
                     android:textSize="34sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -67,13 +58,13 @@
                         android:id="@+id/descriptionInput"
                         android:layout_width="300dp"
                         android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
                         android:layout_weight="1"
                         android:ems="10"
                         android:gravity="top"
-                        android:hint="תיאור המפגע"
-                        android:inputType="textMultiLine"
-                        android:layout_marginTop="20dp"
-                        android:layout_gravity="center_horizontal"/>
+                        android:hint="Hazard details"
+                        android:inputType="textMultiLine" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,13 +77,13 @@
                         android:id="@+id/nameInput"
                         android:layout_width="300dp"
                         android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
                         android:layout_weight="1"
                         android:ems="10"
                         android:gravity="top"
-                        android:hint="שם המדווח"
-                        android:inputType="text"
-                        android:layout_marginTop="16dp"
-                        android:layout_gravity="center_horizontal"/>
+                        android:hint="reporter name"
+                        android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

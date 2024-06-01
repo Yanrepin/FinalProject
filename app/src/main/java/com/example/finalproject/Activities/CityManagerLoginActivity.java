@@ -26,7 +26,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CityManagerLoginActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageButton back;
+
     EditText emailCityManager;
     EditText passCityManager;
     Button submitCityManager;
@@ -36,8 +36,7 @@ public class CityManagerLoginActivity extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.city_manager_login);
-        back = findViewById(R.id.backButton);
-        back.setOnClickListener(this);
+
         emailCityManager=findViewById(R.id.emailCityManager);
         passCityManager=findViewById(R.id.passwordCityManager);
         submitCityManager=findViewById(R.id.submitCityManager);
@@ -47,25 +46,6 @@ public class CityManagerLoginActivity extends AppCompatActivity implements View.
         mAuth = FirebaseAuth.getInstance();
         String email=new String("yanrepinyan@gmail.con");
         String pass=new String("yan1997");
-//        mAuth.createUserWithEmailAndPassword(email, pass)
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            // Sign in success, update UI with the signed-in user's information
-//                            Log.w(TAG, "createUserWithEmail:success");
-//                            Toast.makeText(CityManagerLoginActivity.this, "Authentication hiii.",
-//                                    Toast.LENGTH_SHORT).show();
-//                            FirebaseUser user = mAuth.getCurrentUser();
-//                        } else {
-//                            // If sign in fails, display a message to the user.
-//                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-//                            Toast.makeText(CityManagerLoginActivity.this, "Authentication failed.",
-//                                    Toast.LENGTH_SHORT).show();
-//
-//                        }
-//                    }
-//                });
 
     }
     @Override
@@ -103,9 +83,7 @@ public class CityManagerLoginActivity extends AppCompatActivity implements View.
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == back.getId()) {
-            finish();
-        }
+
         if(v.getId()==submitCityManager.getId())
         {
             String validResult=inputCheck(emailCityManager.getText().toString(),passCityManager.getText().toString());
@@ -139,7 +117,6 @@ public class CityManagerLoginActivity extends AppCompatActivity implements View.
                             }
                         });
             }
-
 
         }
     }

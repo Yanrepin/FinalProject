@@ -26,21 +26,12 @@
             android:orientation="horizontal"
             android:textAlignment="center">
 
-            <ImageButton
-                android:id="@+id/backButton"
-                android:layout_width="150dp"
-                android:layout_height="100dp"
-                android:backgroundTint="#97BAB6B6"
-                android:contentDescription="back Button"
-                android:scaleX="0.95"
-                android:src="@drawable/_565454_200" />
-
             <TextView
                 android:id="@+id/pageName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal|center_vertical"
-                android:text="כל פניות הציבור"
+                android:text="All Inquiries"
                 android:textAlignment="center"
                 android:textSize="34sp" />
 
@@ -59,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="המפגעים הם עבור עיר המיקום הנוכחי שלך:"
+                android:text="The Inquiries is due to your current location:"
                 android:textSize="24sp" />
 
             <Spinner
