@@ -4,103 +4,131 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/citybackground"
     tools:context=".Activities.MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:id="@+id/RelatedLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/userLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Your current city is:"
-                android:textSize="20sp" />
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical">
 
             <LinearLayout
-                android:id="@+id/twoFirstButtonLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/userLocation"
-                android:layout_centerHorizontal="true"
-                android:orientation="horizontal">
+                android:id="@+id/second"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="100dp"
+                android:background="#32FFFFFF"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/cityManager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="100dp"
+                    android:background="@layout/button_background"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Admin acess"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
 
                 <ImageView
-                    android:id="@+id/allInquiries"
+                    android:id="@+id/imageView2"
                     android:layout_width="250dp"
-                    android:layout_height="200dp"
-                    android:layout_centerHorizontal="false"
-                    android:layout_centerVertical="false"
+                    android:layout_height="250dp"
+                    android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
-                    android:background="#A6B1ABAB"
-                    app:srcCompat="@drawable/minimalist_vintage_line_a4_stationery_paper_document__1_" />
+                    tools:srcCompat="@drawable/CM" />
 
-                <ImageView
-                    android:id="@+id/newHazard"
-                    android:layout_width="250dp"
-                    android:layout_height="200dp"
-                    android:layout_marginLeft="10dp"
+                <Button
+                    android:id="@+id/userLocation"
+                    android:layout_width="500dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="30dp"
                     android:layout_weight="1"
-                    android:background="#A6B1ABAB"
-                    app:srcCompat="@drawable/new_danger" />
-            </LinearLayout>
+                    android:background="@layout/button_background3"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Your current city is:"
+                    android:textColor="#000"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/twoSecondButtonsLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/twoFirstButtonLayout"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <ImageView
+                <Button
                     android:id="@+id/addNewMassage"
-                    android:layout_width="250dp"
-                    android:layout_height="200dp"
+                    android:layout_width="400dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginBottom="30dp"
                     android:layout_weight="1"
-                    android:background="#A6B1ABAB"
-                    app:srcCompat="@drawable/minimalist_vintage_line_a4_stationery_paper_document__3_" />
+                    android:background="@layout/button_background2"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="All Messages"
+                    android:textColor="#000000"
+                    android:textSize="30sp" />
 
-                <ImageView
-                    android:id="@+id/contactUs"
-                    android:layout_width="250dp"
-                    android:layout_height="200dp"
-                    android:layout_marginLeft="10dp"
+
+                <Button
+                    android:id="@+id/allInquiries"
+                    android:layout_width="400dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
                     android:layout_weight="1"
-                    android:background="#A6B1ABAB"
-                    app:srcCompat="@drawable/minimalist_vintage_line_a4_stationery_paper_document" />
+                    android:background="@layout/button_background2"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="All Reports"
+                    android:textColor="#000000"
+                    android:textSize="30sp" />
+
+
+                <Button
+                    android:id="@+id/newHazard"
+                    android:layout_width="400dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_weight="1"
+                    android:background="@layout/button_background2"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Add New Report"
+                    android:textColor="#000000"
+                    android:textSize="30sp" />
+
+                <Button
+                    android:id="@+id/contactUs"
+                    android:layout_width="400dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_weight="1"
+                    android:background="@layout/button_background2"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Contact Us"
+                    android:textColor="#000000"
+                    android:textSize="30sp" />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/twoSecondButtonsLayout"
-                android:layout_centerHorizontal="true"
-                android:text="admin?" />
-
-            <TextView
-                android:id="@+id/inquiriesHandler"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/twoSecondButtonsLayout"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/textView2"
-                android:layout_weight="1"
-                android:foregroundGravity="bottom"
-                android:text="sign in"
-                android:textColor="#306BC6" />
 
         </RelativeLayout>
     </ScrollView>

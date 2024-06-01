@@ -12,6 +12,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,12 +28,12 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
-    TextView locationText;
-    ImageView newHazard;
-    ImageView allInquiries;
-    ImageView messages;
-    ImageView contactUs;
-    TextView cityManager;
+    Button locationText;
+    Button newHazard;
+    Button allInquiries;
+    Button messages;
+    Button contactUs;
+    Button cityManager;
     String city;
 
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         locationText = findViewById(R.id.userLocation);
-        cityManager=findViewById(R.id.inquiriesHandler);
+        cityManager=findViewById(R.id.cityManager);
         messages=findViewById(R.id.addNewMassage);
         allInquiries=findViewById(R.id.allInquiries);
         newHazard=findViewById(R.id.newHazard);
