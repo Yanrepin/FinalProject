@@ -3,75 +3,69 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/citybackground">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/relativeLayout"
+            android:id="@+id/RelatedLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical">
+
 
             <LinearLayout
-                android:id="@+id/topLayout"
+                android:id="@+id/second"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:textAlignment="center">
-
+                android:layout_height="match_parent"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="100dp"
+                android:background="#88FFFFFF"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    tools:srcCompat="@drawable/logo" />
                 <TextView
                     android:id="@+id/pageName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|center_horizontal|center_vertical"
-                    android:text="דיווח על מפגע חדש"
+                    android:text="Report On A New Hazard"
                     android:textAlignment="center"
-                    android:textSize="34sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/hazardLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/topLayout"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="50dp"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:textAlignment="center">
+                    android:textColor="#000"
+                    android:textSize="35sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginTop="30dp"/>
 
                 <TextView
                     android:id="@+id/formTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_gravity="center"
                     android:text="Found new hazard?! please report us..."
-                    android:textSize="34sp" />
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="24sp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/descriptionInput"
-                        android:layout_width="300dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="20dp"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:gravity="top"
-                        android:hint="Hazard details"
-                        android:inputType="textMultiLine" />
-
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal">
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/nameInput"
@@ -86,29 +80,49 @@
                         android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/descriptionInput"
+                        android:layout_width="300dp"
+                        android:layout_height="300dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:gravity="top"
+                        android:hint="Hazard details"
+                        android:inputType="textMultiLine" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+
+                    android:layout_gravity="center">
 
                     <!-- Add your image styling here -->
 
                     <ImageView
                         android:id="@+id/uploadedImage"
-                        android:layout_width="300dp"
-                        android:layout_height="300dp"
-                        android:layout_marginTop="8dp"
-                        android:background="#CCCCCC"
+                        android:layout_width="350dp"
+                        android:layout_height="350dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
                         app:srcCompat="@android:drawable/ic_menu_gallery" /> <!-- Placeholder background color -->
 
                     <ImageButton
                         android:id="@+id/imageUploadButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:layout_gravity="center"
                         android:contentDescription="Upload Image"
                         android:src="@android:drawable/ic_menu_camera" />
                 </LinearLayout>
@@ -119,9 +133,11 @@
                     android:id="@+id/dateTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:text="תאריך: "
-                    android:textSize="16sp" />
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"/>
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -132,19 +148,23 @@
                     android:maxWidth="48dp"
                     android:maxHeight="48dp"
                     android:minWidth="48dp"
-                    android:minHeight="48dp" />
+                    android:minHeight="48dp"
+                    android:layout_gravity="center"/>
 
                 <ImageView
                     android:id="@+id/checkImg"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
+                    android:layout_gravity="center"
                     app:srcCompat="@android:drawable/checkbox_on_background" />
 
                 <Button
                     android:id="@+id/sendNewHazard"
-                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
                     android:layout_height="wrap_content"
-                    android:text="Add New Hazard" />
+                    android:text="Add New Hazard"
+                    android:background="@drawable/button_background"
+                    android:layout_width="250dp"/>
 
                 <!-- You can use a TextView to display the default date -->
 

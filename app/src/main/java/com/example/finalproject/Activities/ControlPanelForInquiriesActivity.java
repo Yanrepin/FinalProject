@@ -19,6 +19,7 @@ import com.example.finalproject.R;
 import com.example.finalproject.UICompponents.CustomAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,11 +33,11 @@ public class ControlPanelForInquiriesActivity extends AppCompatActivity implemen
     String userEmail;
     TextView inquiriesForControl;
     ListView inquiriesList;
-    Button statusOpen;
+    MaterialButton statusOpen;
     boolean statusOpenFlag=false;
-    Button statusPending;
+    MaterialButton statusPending;
     boolean statusPendingFlag=false;
-    Button statusClosed;
+    MaterialButton statusClosed;
     boolean statusClosedFlag=false;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 

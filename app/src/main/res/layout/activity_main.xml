@@ -23,18 +23,20 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="100dp"
                 android:layout_marginRight="100dp"
-                android:background="#32FFFFFF"
+                android:background="#88FFFFFF"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <Button
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:drawableStart="@drawable/menager_icon"
                     android:id="@+id/cityManager"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="100dp"
-                    android:background="@layout/button_background"
+                    android:background="@drawable/button_background"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="Admin acess"
@@ -47,7 +49,7 @@
                     android:layout_height="250dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
-                    tools:srcCompat="@drawable/CM" />
+                    tools:srcCompat="@drawable/logo" />
 
                 <Button
                     android:id="@+id/userLocation"
@@ -57,7 +59,7 @@
                     android:layout_marginTop="50dp"
                     android:layout_marginBottom="30dp"
                     android:layout_weight="1"
-                    android:background="@layout/button_background3"
+                    android:background="@drawable/button_background3"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="Your current city is:"
@@ -66,66 +68,73 @@
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/addNewMassage"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/allMassage"
                     android:layout_width="400dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_marginTop="100dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_weight="1"
-                    android:background="@layout/button_background2"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="All Messages"
+                    android:textStyle="bold"
+                    android:text="ALL MESSAGES"
+                    android:drawableStart="@drawable/ms_icon"
+                    android:paddingStart="50dp"
                     android:textColor="#000000"
-                    android:textSize="30sp" />
-
+                    android:textSize="30sp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@drawable/button_background2"
+                    android:layout_gravity="center_horizontal|center_vertical" />
 
                 <Button
+                    xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/allInquiries"
                     android:layout_width="400dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:textStyle="bold"
+                    android:text="ALL REPORTS"
+                    android:drawableStart="@drawable/all_reports_icon"
+                    android:paddingStart="50dp"
+                    android:textColor="#000000"
+                    android:textSize="30sp"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="30dp"
-                    android:layout_weight="1"
-                    android:background="@layout/button_background2"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="All Reports"
-                    android:textColor="#000000"
-                    android:textSize="30sp" />
+                    android:background="@drawable/button_background2"
+                    android:layout_gravity="center_horizontal|center_vertical" />
 
 
                 <Button
+                    xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/newHazard"
                     android:layout_width="400dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:textStyle="bold"
+                    android:text="ADD NEW REPORT"
+                    android:drawableStart="@drawable/report_icon"
+                    android:paddingStart="50dp"
+                    android:textColor="#000000"
+                    android:textSize="30sp"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="30dp"
-                    android:layout_weight="1"
-                    android:background="@layout/button_background2"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="Add New Report"
-                    android:textColor="#000000"
-                    android:textSize="30sp" />
+                    android:background="@drawable/button_background2"
+                    android:layout_gravity="center_horizontal|center_vertical" />
+
+
 
                 <Button
+                    xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/contactUs"
                     android:layout_width="400dp"
                     android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_weight="1"
-                    android:background="@layout/button_background2"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="Contact Us"
+                    android:textStyle="bold"
+                    android:text="CONTACT US"
+                    android:drawableStart="@drawable/contact_icon"
+                    android:paddingStart="50dp"
                     android:textColor="#000000"
-                    android:textSize="30sp" />
+                    android:textSize="30sp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="100dp"
+                    android:background="@drawable/button_background2"
+                    android:layout_gravity="center_horizontal|center_vertical" />
+
+
 
             </LinearLayout>
 

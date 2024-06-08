@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         locationText = findViewById(R.id.userLocation);
         cityManager=findViewById(R.id.cityManager);
-        messages=findViewById(R.id.addNewMassage);
+        messages=findViewById(R.id.allMassage);
         allInquiries=findViewById(R.id.allInquiries);
         newHazard=findViewById(R.id.newHazard);
         contactUs=findViewById(R.id.contactUs);
