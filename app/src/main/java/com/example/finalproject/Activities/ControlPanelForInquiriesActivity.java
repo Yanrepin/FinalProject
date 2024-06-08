@@ -33,11 +33,11 @@ public class ControlPanelForInquiriesActivity extends AppCompatActivity implemen
     String userEmail;
     TextView inquiriesForControl;
     ListView inquiriesList;
-    MaterialButton statusOpen;
+    Button statusOpen;
     boolean statusOpenFlag=false;
-    MaterialButton statusPending;
+    Button statusPending;
     boolean statusPendingFlag=false;
-    MaterialButton statusClosed;
+    Button statusClosed;
     boolean statusClosedFlag=false;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
