@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ControlPanelForInquiriesActivity extends AppCompatActivity implements View.OnClickListener{
+
     String cityOfUser;
     String userEmail;
     TextView inquiriesForControl;
@@ -52,7 +53,7 @@ public class ControlPanelForInquiriesActivity extends AppCompatActivity implemen
         cityOfUser=intent.getStringExtra("user city");
 
         inquiriesForControl=findViewById(R.id.inquiriesForControl);
-        inquiriesForControl.setText("Your city inquiries: " + cityOfUser);
+        inquiriesForControl.setText("The reports is related to your city: " + cityOfUser);
 
         inquiriesList=findViewById(R.id.inquiriesList);
 
@@ -69,17 +70,38 @@ public class ControlPanelForInquiriesActivity extends AppCompatActivity implemen
     }
     @Override
     public void onClick(View v) {
+         if (v.getId() == statusOpen.getId()) {
 
-        if (v.getId() == statusOpen.getId()) {
             statusOpenFlag=!statusOpenFlag;
+            if (statusOpenFlag) {
+                // Change to normal state background drawable
+                statusOpen.setBackgroundResource(R.drawable.status1);
+            } else {
+                // Change to pressed state background drawable
+                statusOpen.setBackgroundResource(R.drawable.status1white);
+            }
             getInquiriessFromDB( cityOfUser , statusOpenFlag, statusPendingFlag, statusClosedFlag);
         }
         else if (v.getId() == statusPending.getId()) {
             statusPendingFlag=!statusPendingFlag;
+            if (statusPendingFlag) {
+                // Change to normal state background drawable
+                statusPending.setBackgroundResource(R.drawable.status2);
+            } else {
+                // Change to pressed state background drawable
+                statusPending.setBackgroundResource(R.drawable.status2white);
+            }
             getInquiriessFromDB( cityOfUser , statusOpenFlag, statusPendingFlag, statusClosedFlag);
         }
         else if (v.getId() == statusClosed.getId()) {
             statusClosedFlag=!statusClosedFlag;
+            if (statusClosedFlag) {
+                // Change to normal state background drawable
+                statusClosed.setBackgroundResource(R.drawable.status3);
+            } else {
+                // Change to pressed state background drawable
+                statusClosed.setBackgroundResource(R.drawable.status3white);
+            }
             getInquiriessFromDB( cityOfUser , statusOpenFlag, statusPendingFlag, statusClosedFlag);
         }
     }
