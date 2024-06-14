@@ -4,6 +4,10 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
+    <style name="CustomHintTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:hint">30sp</item>
+        <!-- You can customize other properties here if needed -->
+    </style>
 
     <style name="Theme.FinalProject" parent="Base.Theme.FinalProject" />
 </resources>

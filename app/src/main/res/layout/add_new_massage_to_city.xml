@@ -18,54 +18,61 @@
         <LinearLayout
             android:id="@+id/second"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
             android:layout_marginRight="100dp"
             android:background="#88FFFFFF"
             android:gravity="center_vertical"
             android:orientation="vertical">
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:layout_marginTop="30dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                tools:srcCompat="@drawable/logo" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:background="#00FFFFFF"
+                android:contentDescription="logo"
+                android:importantForAccessibility="no"
+                app:srcCompat="@drawable/logo" />
+
             <TextView
                 android:id="@+id/pageName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal|center_vertical"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
                 android:text="Add New Message To Your City"
                 android:textAlignment="center"
                 android:textColor="#000"
                 android:textSize="35sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="30dp" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/newMessage"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:background="#799E9C9C"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="New message content"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="30dp"
-                android:inputType="text|textAutoCorrect|textMultiLine" />
+                android:inputType="text|textAutoCorrect|textMultiLine"
+                android:textColorHint="#049595"
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/submitMessage"
-                android:layout_gravity="center"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:text="Submit new message"
-                android:layout_marginBottom="30dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/button_background"
-                android:layout_width="250dp"/>
+                android:text="Submit new message"
+                android:textSize="25sp" />
         </LinearLayout>
 
     </RelativeLayout>

@@ -114,6 +114,7 @@ public class CustomAdapter extends ArrayAdapter<HazardInfo> {
         for (int i = 0; i < statuses.length; i++) {
             RadioButton radioButton = new RadioButton(mContext);
             radioButton.setText(statuses[i]);
+            radioButton.setTextSize(30);
             radioButton.setTag(statuses[i]); // Set the status as the tag
             radioGroup.addView(radioButton);
             // Add OnCheckedChangeListener to each radio button

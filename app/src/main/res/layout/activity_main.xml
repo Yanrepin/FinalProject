@@ -20,36 +20,38 @@
             <LinearLayout
                 android:id="@+id/second"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="100dp"
                 android:layout_marginRight="100dp"
                 android:background="#88FFFFFF"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
-                <Button
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:drawableStart="@drawable/menager_icon"
+                <Button xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/cityManager"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="100dp"
-                    android:background="@drawable/button_background"
+                    android:background="@drawable/button_background2"
+                    android:drawableStart="@drawable/menager_icon"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="Admin acess"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="250dp"
-                    android:layout_height="250dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    tools:srcCompat="@drawable/logo" />
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:background="#00FFFFFF"
+                    android:contentDescription="logo"
+                    android:importantForAccessibility="no"
+                    app:srcCompat="@drawable/logo" />
+
 
                 <Button
                     android:id="@+id/userLocation"
@@ -67,73 +69,67 @@
                     android:textSize="35sp"
                     android:textStyle="bold" />
 
-                <Button
-                    xmlns:android="http://schemas.android.com/apk/res/android"
+                <Button xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/allMassage"
                     android:layout_width="400dp"
                     android:layout_height="100dp"
-                    android:textStyle="bold"
-                    android:text="ALL MESSAGES"
-                    android:drawableStart="@drawable/ms_icon"
-                    android:paddingStart="50dp"
-                    android:textColor="#000000"
-                    android:textSize="30sp"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="30dp"
-                    android:background="@drawable/button_background2"
-                    android:layout_gravity="center_horizontal|center_vertical" />
+                    android:background="@drawable/button_background"
+                    android:drawableStart="@drawable/ms_icon"
+                    android:paddingStart="50dp"
+                    android:text="ALL MESSAGES"
+                    android:textColor="#000000"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
-                <Button
-                    xmlns:android="http://schemas.android.com/apk/res/android"
+                <Button xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/allInquiries"
                     android:layout_width="400dp"
                     android:layout_height="100dp"
-                    android:textStyle="bold"
-                    android:text="ALL REPORTS"
-                    android:drawableStart="@drawable/all_reports_icon"
-                    android:paddingStart="50dp"
-                    android:textColor="#000000"
-                    android:textSize="30sp"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="30dp"
-                    android:background="@drawable/button_background2"
-                    android:layout_gravity="center_horizontal|center_vertical" />
+                    android:background="@drawable/button_background"
+                    android:drawableStart="@drawable/all_reports_icon"
+                    android:paddingStart="50dp"
+                    android:text="ALL REPORTS"
+                    android:textColor="#000000"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
 
-                <Button
-                    xmlns:android="http://schemas.android.com/apk/res/android"
+                <Button xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/newHazard"
                     android:layout_width="400dp"
                     android:layout_height="100dp"
-                    android:textStyle="bold"
-                    android:text="ADD NEW REPORT"
-                    android:drawableStart="@drawable/report_icon"
-                    android:paddingStart="50dp"
-                    android:textColor="#000000"
-                    android:textSize="30sp"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="30dp"
-                    android:background="@drawable/button_background2"
-                    android:layout_gravity="center_horizontal|center_vertical" />
+                    android:background="@drawable/button_background"
+                    android:drawableStart="@drawable/report_icon"
+                    android:paddingStart="50dp"
+                    android:text="ADD NEW REPORT"
+                    android:textColor="#000000"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
 
-
-                <Button
-                    xmlns:android="http://schemas.android.com/apk/res/android"
+                <Button xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/contactUs"
                     android:layout_width="400dp"
                     android:layout_height="100dp"
-                    android:textStyle="bold"
-                    android:text="CONTACT US"
-                    android:drawableStart="@drawable/contact_icon"
-                    android:paddingStart="50dp"
-                    android:textColor="#000000"
-                    android:textSize="30sp"
+                    android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="100dp"
-                    android:background="@drawable/button_background2"
-                    android:layout_gravity="center_horizontal|center_vertical" />
-
+                    android:background="@drawable/button_background"
+                    android:drawableStart="@drawable/contact_icon"
+                    android:paddingStart="50dp"
+                    android:text="CONTACT US"
+                    android:textColor="#000000"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
 
             </LinearLayout>

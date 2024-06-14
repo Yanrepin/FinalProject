@@ -17,103 +17,120 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical">
 
-            <LinearLayout
-                android:id="@+id/second"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="100dp"
-                android:layout_marginRight="100dp"
-                android:background="#88FFFFFF"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="250dp"
-                    android:layout_height="250dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="1"
-                    tools:srcCompat="@drawable/logo" />
-
-                <TextView
-                    android:id="@+id/addUserTitle"
+                <LinearLayout
+                    android:id="@+id/second"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Add New User"
-                    android:textAlignment="center"
-                    android:textColor="#000"
-                    android:textSize="35sp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginTop="30dp" />
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginRight="100dp"
+                    android:background="#88FFFFFF"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/addNewUserEmailInput"
-                    android:layout_width="300dp"
-                    android:layout_height="100dp"
-                    android:ems="10"
-                    android:hint="Email"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_gravity="center"
-                    android:inputType="textEmailAddress" />
+                    <ImageButton
+                        android:id="@+id/imageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:background="#00FFFFFF"
+                        android:contentDescription="logo"
+                        android:importantForAccessibility="no"
+                        app:srcCompat="@drawable/logo" />
+                    <TextView
+                        android:id="@+id/addUserTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:gravity="center"
+                        android:text="Add New User"
+                        android:textAlignment="center"
+                        android:textColor="#000"
+                        android:textSize="35sp"
+                        android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/addNewUserPasswordInput"
-                    android:layout_width="300dp"
-                    android:layout_height="100dp"
-                    android:ems="10"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginTop="30dp"
-                    android:hint="Password"
-                    android:layout_gravity="center"
-                    android:inputType="textPassword" />
+                    <EditText
+                        android:id="@+id/addNewUserEmailInput"
+                        android:layout_width="300dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="#799E9C9C"
+                        android:ems="10"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:textColorHint="#049595"
+                        android:textSize="25sp" />
 
-                <EditText
-                    android:id="@+id/addNewUserCityInput"
-                    android:layout_width="300dp"
-                    android:layout_height="100dp"
-                    android:ems="10"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginTop="30dp"
-                    android:hint="City"
-                    android:layout_gravity="center"
-                    android:inputType="text" />
+                    <EditText
+                        android:id="@+id/addNewUserPasswordInput"
+                        android:layout_width="300dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="#799E9C9C"
+                        android:ems="10"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:textColorHint="#049595"
+                        android:textSize="25sp" />
 
-                <EditText
-                    android:id="@+id/addNewUserNameInput"
-                    android:layout_width="300dp"
-                    android:layout_height="100dp"
-                    android:ems="10"
-                    android:layout_gravity="center"
-                    android:hint="Name"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginTop="30dp"
-                    android:inputType="text" />
+                    <EditText
+                        android:id="@+id/addNewUserCityInput"
+                        android:layout_width="300dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="#799E9C9C"
+                        android:ems="10"
+                        android:hint="City"
+                        android:inputType="text"
+                        android:textColorHint="#049595"
+                        android:textSize="25sp" />
 
-                <EditText
-                    android:id="@+id/addNewUserRuleInput"
-                    android:layout_width="300dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:ems="10"
-                    android:hint="Rule"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginTop="30dp"
-                    android:inputType="text" />
+                    <EditText
+                        android:id="@+id/addNewUserNameInput"
+                        android:layout_width="300dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="#799E9C9C"
+                        android:ems="10"
+                        android:hint="Name"
+                        android:inputType="text"
+                        android:textColorHint="#049595"
+                        android:textSize="25sp" />
 
-                <Button
-                    android:id="@+id/addNewUserButton"
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="Add New User"
-                    android:background="@drawable/button_background"
-                    />
+                    <EditText
+                        android:id="@+id/addNewUserRuleInput"
+                        android:layout_width="300dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="#799E9C9C"
+                        android:ems="10"
+                        android:hint="Rule"
+                        android:inputType="text"
+                        android:textColorHint="#049595"
+                        android:textSize="25sp" />
 
-            </LinearLayout>
+                    <Button
+                        android:id="@+id/addNewUserButton"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/button_background"
+                        android:gravity="center"
+                        android:text="Add New User"
+                        android:textSize="25sp" />
+
+                </LinearLayout>
             </RelativeLayout>
         </ScrollView>
 
