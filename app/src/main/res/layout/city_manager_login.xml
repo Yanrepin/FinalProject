@@ -81,7 +81,7 @@
                     android:layout_width="250dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="30dp"
                     android:background="#799E9C9C"
                     android:ems="10"
                     android:hint="Password"

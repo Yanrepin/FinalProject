@@ -9,129 +9,130 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <RelativeLayout
-        android:id="@+id/RelatedLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical">
 
-        <LinearLayout
-            android:id="@+id/second"
+        <RelativeLayout
+            android:id="@+id/RelatedLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:layout_marginRight="100dp"
-            android:background="#88FFFFFF"
-            android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical">
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:background="#00FFFFFF"
-                android:contentDescription="logo"
-                android:importantForAccessibility="no"
-                app:srcCompat="@drawable/logo" />
-            <TextView
-                android:id="@+id/pageName"
+            <LinearLayout
+                android:id="@+id/second"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|center_horizontal|center_vertical"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                android:text="Contact Us"
-                android:textAlignment="center"
-                android:textColor="#000"
-                android:textSize="35sp"
-                android:textStyle="bold" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="100dp"
+                android:background="#88FFFFFF"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                android:gravity="center"
-                android:minHeight="100dp" />
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:background="#00FFFFFF"
+                    android:contentDescription="logo"
+                    android:importantForAccessibility="no"
+                    app:srcCompat="@drawable/logo" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                android:textColorHint="#049595">
+                <TextView
+                    android:id="@+id/pageName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|center_horizontal|center_vertical"
+                    android:layout_marginTop="20dp"
+                    android:text="Contact Us"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:textSize="35sp"
+                    android:textStyle="bold" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/name"
+                <Spinner
+                    android:id="@+id/spinner"
                     android:layout_width="300dp"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="30dp"
-                    android:background="#799E9C9C"
-                    android:ems="10"
-                    android:hint="Name"
-                    android:inputType="textPersonName"
-                    android:textSize="25sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center"
+                    android:minHeight="100dp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                android:textColorHint="#049595">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textColorHint="#049595">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/phone"
-                    android:layout_width="300dp"
-                    android:layout_height="100dp"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/name"
+                        android:layout_width="300dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:background="#799E9C9C"
+                        android:ems="10"
+                        android:hint="Name"
+                        android:inputType="textPersonName"
+                        android:textSize="25sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textColorHint="#049595">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phone"
+                        android:layout_width="300dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:background="#799E9C9C"
+                        android:ems="10"
+                        android:hint="Phone"
+                        android:inputType="phone"
+                        android:textSize="25sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textColorHint="#049595">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/details"
+                        android:layout_width="300dp"
+                        android:layout_height="300dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:background="#799E9C9C"
+                        android:ems="10"
+                        android:hint="Describtion"
+                        android:inputType="textLongMessage"
+                        android:textSize="25sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/submit"
+                    android:layout_width="250dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginTop="50dp"
-                    android:background="#799E9C9C"
-                    android:ems="10"
-                    android:hint="Phone"
-                    android:inputType="phone"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/button_background"
+                    android:text="Submit to city municipality"
                     android:textSize="25sp" />
-            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                android:textColorHint="#049595">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/details"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="50dp"
-                    android:background="#799E9C9C"
-                    android:ems="10"
-                    android:hint="Describtion"
-                    android:inputType="textLongMessage"
-                    android:textSize="25sp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/submit"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/button_background"
-                android:text="Submit to city municipality"
-                android:textSize="25sp" />
-
-        </LinearLayout>
+            </LinearLayout>
 
 
-    </RelativeLayout>
+        </RelativeLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

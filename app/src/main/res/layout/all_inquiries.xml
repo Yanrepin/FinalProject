@@ -34,13 +34,14 @@
                 android:contentDescription="logo"
                 android:importantForAccessibility="no"
                 app:srcCompat="@drawable/logo" />
+
             <TextView
                 android:id="@+id/pageName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal|center_vertical"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:text="All Inquiries"
                 android:textAlignment="center"
                 android:textColor="#000"
@@ -52,8 +53,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:text="The Inquiries is due to your current location:"
                 android:textAlignment="center"
                 android:textColor="#000"
@@ -64,8 +65,8 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:gravity="center"
                 android:minHeight="100dp" />
 
@@ -73,8 +74,8 @@
                 android:id="@+id/inquiriesList"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp" />
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
 
         </LinearLayout>
 
