@@ -1,0 +1,1243 @@
+<script>
+var __fast_options  = { with_product_attributes: true};
+
+const VNEXT_CLEARANCE_TAG_NAME = "badge clearance";
+const VNEXT_NEW_TAG_NAME = "badge new";
+const VNEXT_RECYCLABLE_TAG_NAME = "badge recyclable";
+const VNEXT_SECOND_RECYCLABLE_TAG_NAME  ="use recyclable";
+const VNEXT_ONLINE_ONLY_TAG_NAME = "badge online only";
+const VNEXT_LOW_STOCK_TAG_NAME = "badge low stock";
+const VNEXT_BEST_SELLER_TAG_NAME = "badge best seller";
+const VNEXT_EDDP_TAG_NAME = "badge eddp";
+const VNEXT_EPICDEAL_TAG_NAME = "badge epicdeal";
+const VNEXT_SALE_TAG_NAME = "badge sale";
+
+/* get all products to loop on */
+function getProductElements(element) {
+   return [...element.querySelectorAll(`.fs-results-product-card`)];
+}
+
+const NewBadges = {
+
+    set: (product, productElement) => {
+        var $badgewapper = `<div class="fs-badges-wrapper"></div>`;
+
+        if (productElement.querySelectorAll(`.fs-badges-wrapper`).length === 0) {
+            productElement.querySelector(".image-wrapper").insertAdjacentHTML('afterBegin', $badgewapper);
+        }
+      
+        const tags = product.tags;        
+
+        if(tags && NewBadges.isClearance(tags)) {
+          if (productElement.querySelectorAll(`.text-badge.fs-text-badge-badge.clearance`).length === 0) {
+            NewBadges.addLabel(productElement,`<div class="text-badge fs-text-badge-badge clearance">CLEARANCE</div>`);
+          }
+        }
+        else if(tags && NewBadges.isBestSeller(tags)) {
+          if (productElement.querySelectorAll(`.text-badge.fs-text-badge-badge.best-seller`).length === 0) {
+            NewBadges.addLabel(productElement,`<div class="text-badge fs-text-badge-badge best-seller">BEST SELLER</div>`);
+          }
+        }
+        else if(tags && NewBadges.isNew(tags)) {
+          if (productElement.querySelectorAll(`.text-badge.fs-text-badge-badge.new`).length === 0) {
+            NewBadges.addLabel(productElement,`<div class="text-badge fs-text-badge-badge new">NEW</div>`);
+          }
+        }
+        else if(tags && NewBadges.isOnlineOnly(tags)) {
+          if (productElement.querySelectorAll(`.text-badge.fs-text-badge-badge.online-only`).length === 0) {
+            NewBadges.addLabel(productElement,`<div class="text-badge fs-text-badge-badge online-only">ONLINE ONLY</div>`);
+          }
+        }
+        else if(tags && NewBadges.isLowStock(tags)) {
+          if (productElement.querySelectorAll(`.text-badge.fs-text-badge-badge.low-stock`).length === 0) {
+            NewBadges.addLabel(productElement,`<div class="text-badge fs-text-badge-badge low-stock">LOW STOCK</div>`);
+          }
+        }
+        else if(tags && NewBadges.isRecyclable(tags)) {
+          if (productElement.querySelectorAll(`.text-badge.fs-text-badge-badge.recyclable`).length === 0) {
+            NewBadges.addLabel(productElement,`<div class="text-badge fs-text-badge-badge recyclable">RECYCLABLE</div>`);
+          }
+        }
+      
+
+        if(tags && NewBadges.isEddp(tags)) {
+          if (productElement.querySelectorAll(`.image-badge.fs-image-badge-badge.eddp`).length === 0) {
+            NewBadges.addImageLabel(productElement,`<div class="image-badge fs-image-badge-badge eddp"><img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0194/5016/7395/files/BRU_Web_Badge_EDLP_V2.svg?v=1701730923" alt="badge icon" width="100%"></div>`);
+          }
+        }
+
+      
+        if(product && NewBadges.isOnSale(product))
+        {
+          var discountPrice = ( parseFloat(product.comparePrice) - parseFloat(product.price) ) / parseFloat(product.comparePrice);
+          var DiscountRoundOff = Math.floor(((Math.round((discountPrice * 100 )) / 100) / 5) * 100) * 5;
+          //sale badge image
+          if(tags && NewBadges.isSale(tags)) {
+            if (productElement.querySelectorAll(`.image-badge.fs-image-badge-badge.sale`).length === 0) {
+              NewBadges.addImageLabel(productElement,`<div class="image-badge fs-image-badge-badge sale"><img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0194/5016/7395/files/BRU_Web_Badge_Sale_V2.svg?v=1715219957" width="100%"></div>`);
+            }
+          }
+          //%off badges
+          else if((tags && !NewBadges.isSale(tags) && !NewBadges.isEddp(tags)) || (!tags))
+          {
+            var newDiscount = '';
+            if(DiscountRoundOff == 10){
+              newDiscount += '<img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0194/5016/7395/files/BRU_Web_Badge_10.svg?v=1700702858" width="100%">';
+            }else if(DiscountRoundOff == 15){
+              newDiscount += '<img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0194/5016/7395/files/BRU_Web_Badge_15.svg?v=1701730922" width="100%">';
+            }else if(DiscountRoundOff == 20){
+              newDiscount += '<img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0194/5016/7395/files/BRU_Web_Badge_20.svg?v=1700702858" width="100%">';
+            }else if(DiscountRoundOff == 25){
+              newDiscount += '<img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0194/5016/7395/files/BRU_Web_Badge_25.svg?v=1701730923" width="100%">';
+            }else if(DiscountRoundOff == 30){
+              newDiscount += '<img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0769/2127/4658/files/BRU_Web_Badge_30_-200x192.webp?v=1706554164" width="100%">';
+            }else if(DiscountRoundOff == 35){
+              newDiscount += '<img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0194/5016/7395/files/BRU_Web_Badge_35.svg?v=1701730923" width="100%">';
+            }else if(DiscountRoundOff == 40){
+              newDiscount += '<img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0194/5016/7395/files/BRU_Web_Badge_40.svg?v=1700702858" width="100%">';
+            }else if(DiscountRoundOff == 45){
+              newDiscount += '<img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0194/5016/7395/files/BRU_Web_Badge_45.svg?v=1701730923" width="100%">';
+            }else if(DiscountRoundOff == 50){
+              newDiscount += '<img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0194/5016/7395/files/BRU_Web_Badge_50.svg?v=1700702858" width="100%">';
+            }else if(DiscountRoundOff == 55){
+              newDiscount += '<img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0194/5016/7395/files/BRU_Web_Badge_55.svg?v=1701730923" width="100%">';
+            }else if(DiscountRoundOff == 60){
+              newDiscount += '<img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0194/5016/7395/files/BRU_Web_Badge_60.svg?v=1700702858" width="100%">';
+            }else if(DiscountRoundOff == 65){
+              newDiscount += '<img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0194/5016/7395/files/BRU_Web_Badge_65.svg?v=1701730923" width="100%">';
+            } else if(DiscountRoundOff == 70){
+              newDiscount += '<img class="discount-percentage-tag" src="https://cdn.shopify.com/s/files/1/0194/5016/7395/files/BRU_Web_Badge_70.svg?v=1700702858" width="100%">';
+            }
+
+            if(newDiscount!='')
+            {
+              if (productElement.querySelectorAll(`.image-badge.fs-image-badge-badge.sale-off`).length === 0) {
+                NewBadges.addImageLabel(productElement,`<div class="image-badge fs-image-badge-badge sale-off">${newDiscount}</div>`);
+              }
+            }
+            
+          }
+        }
+    },
+
+
+    addLabel: (productElement, promolabel ) => {      
+        productElement.querySelector(".fs-badges-wrapper").insertAdjacentHTML('afterBegin', promolabel);      
+    },
+    addImageLabel: (productElement, promolabel ) => {      
+        productElement.querySelector(".fs-badges-wrapper").insertAdjacentHTML('beforeBegin', promolabel);      
+    },
+
+    isSoldOut: (product) => {
+        return ("isSoldOut" in product && product.isSoldOut)
+    },
+
+    isClearance: (tags) => {
+        return tags.includes(VNEXT_CLEARANCE_TAG_NAME);
+    },
+
+    isNew: (tags) => {
+        return tags.includes(VNEXT_NEW_TAG_NAME);
+    },
+
+    isRecyclable: (tags) => {
+        return tags.includes(VNEXT_RECYCLABLE_TAG_NAME) || tags.includes(VNEXT_SECOND_RECYCLABLE_TAG_NAME);
+    },
+  
+    isOnlineOnly: (tags) => {
+        return tags.includes(VNEXT_ONLINE_ONLY_TAG_NAME);
+    },
+
+    isLowStock: (tags) => {
+        return tags.includes(VNEXT_LOW_STOCK_TAG_NAME);
+    },
+
+    isBestSeller: (tags) => {
+        return tags.includes(VNEXT_BEST_SELLER_TAG_NAME);
+    },
+  
+    isEddp: (tags) => {
+        return tags.includes(VNEXT_EDDP_TAG_NAME);
+    },
+
+    isSale: (tags) => {
+        return tags.includes(VNEXT_SALE_TAG_NAME);
+    },
+
+  
+
+    isOnSale: (product) => {
+        const originalPrice = parseFloat(product.price);
+        const price = parseFloat(product.comparePrice);
+
+        return price && originalPrice && originalPrice > 0 && price > 0 && price > originalPrice;
+    }
+
+};
+
+function Getattributevalue(att,name) {
+    if ( typeof(att) !== "undefined" && att !== null ) {
+       for (let key in att) {
+            if (att[key][0] === name){
+                return att[key][1][0];
+            }
+        }
+    }
+
+    return "";
+}  
+
+// Function to create and populate a drop-down
+function createDropdown(element, options, id, label, additionalClass = '') {
+    if ( typeof(options[0]) === "undefined" ) { 
+      return;
+    }
+
+    if (!element.querySelector(`.${id}_dropdown-container`)) {
+        var div = document.createElement('div');
+        div.className = id + '_dropdown-container';
+        
+        var labelElement = document.createElement('label');
+        labelElement.setAttribute('for', id);
+        labelElement.textContent = label;
+        div.classList.add('fs-dropdown');
+        div.appendChild(labelElement);
+
+        var select = document.createElement('select');
+        select.id = id;
+        options.forEach(function(option) {
+            var optionElement = document.createElement('option');
+            optionElement.value = option;
+            optionElement.textContent = option;
+            select.classList.add('fs-dropdown-select');
+            if(additionalClass)
+            {
+              select.classList.add(additionalClass);            
+            }
+
+            select.appendChild(optionElement);
+        });
+        div.appendChild(select);
+
+        var infoelement = element.querySelector(".fs-variants-container");
+        infoelement.insertAdjacentElement('beforeend', div);        
+    }
+}  
+
+function buildcomfortlevelfilter(element,facets) {
+
+  // Check if the mainContainer already exists within infoelement
+  var infoelement = element.querySelector(".category-title-wrapper");
+  if (infoelement.querySelectorAll('#fs-pfs-filter-tree-pf-t-comfort-level').length > 0) {
+    return; // Exit function if mainContainer already exists
+  }
+  
+  // Create the main container
+  let mainContainer = document.createElement('div');
+  mainContainer.className = 'fs-pfs-filter-option-content';
+  mainContainer.id = 'fs-pfs-filter-tree-pf-t-comfort-level';
+  
+  // Create the comfort level container
+  let comfortContainer = document.createElement('div');
+  comfortContainer.className = 'comfort-level-container';
+  
+  let comfortLevels = ['Firm', 'Medium', 'Plush'];
+  comfortLevels.forEach(level => {
+      let div = document.createElement('div');
+      div.className = `comfort-${level.toLowerCase()}`;
+      div.textContent = level;
+      comfortContainer.appendChild(div);
+  });
+  
+  // Add the comfort container to the main container
+  mainContainer.appendChild(comfortContainer);
+  
+  // Create the inner content container
+  let innerContainer = document.createElement('div');
+  innerContainer.className = 'fs-pfs-filter-option-content-inner';
+  
+  // Create the list
+  let ul = document.createElement('ul');
+  ul.className = 'fs-pfs-filter-option-item-list fs-pfs-filter-option-item-list-box';
+
+
+  //check results of comfort level that have no results
+  var avialibleArr=[];
+  if(facets)
+  {
+    var facetsOfComfort=facets.find(index=>index.name=="Comfort level");
+    if(facetsOfComfort && facetsOfComfort.values)
+    {
+      facetsOfComfort.values.forEach((value)=>{avialibleArr.push(value.name)});
+    }
+  }
+  
+  // Loop to create the list items
+  for (let i = 1; i <= 10; i++) {
+      let li = document.createElement('li');
+      li.className = 'fs-pfs-filter-option-item fs-pfs-filter-option-label';
+      li.style.width = '10.5%';
+  
+      let button = document.createElement('button');
+      button.role = 'checkbox';
+      button.className = 'fs-pfs-filter-button';
+  
+      let checkbox = document.createElement('span');
+      checkbox.className = 'fs-pfs-check-box';
+      checkbox.role = 'checkbox';
+      checkbox.tabIndex = 0;
+      checkbox.ariaLabelledBy = i.toString();
+  
+      let value = document.createElement('span');
+      value.className = 'fs-pfs-filter-option-value';
+      value.textContent = i;
+  
+      let amount = document.createElement('span');
+      amount.className = 'fs-pfs-filter-option-amount';
+      amount.ariaLabel = '';
+  
+      button.appendChild(checkbox);
+      button.appendChild(value);
+      button.appendChild(amount);
+  
+      li.appendChild(button);
+      ul.appendChild(li);
+
+      // Grey out not available
+      if (!avialibleArr.includes(i.toString()) && !avialibleArr.includes("Comfort Level "+i.toString())) {
+        li.classList.add("disable");
+      }
+  }
+  
+  // Add the list to the inner content container
+  innerContainer.appendChild(ul);
+  
+  // Add the inner content container to the main container
+  mainContainer.appendChild(innerContainer);
+
+  // Append the main container to the body or any other desired parent element  
+  infoelement.insertAdjacentElement('beforeend', mainContainer);
+
+  // Add the more info link
+  let moreInfoLink = document.createElement('a');
+  moreInfoLink.href = '/pages/comfort-level';
+  moreInfoLink.className = 'more-info';
+  moreInfoLink.textContent = 'More information';
+
+  // Append the link to the infoelement
+  if(!infoelement.querySelector(".more-info"))
+  {
+    infoelement.insertAdjacentElement('beforeend', moreInfoLink);    
+  }
+
+
+  //add events
+  buildComfortLevelFilterEvents(element,avialibleArr);
+  let comfoertLevelTitle = element.querySelector('.category-title.fs-category-title[aria-label="Comfort level"]');
+  comfoertLevelTitle.addEventListener('click', () => {
+      if (comfoertLevelTitle.getAttribute('aria-expanded') == 'false') {
+        mainContainer.classList.add('collapsed');
+      } else {
+        mainContainer.classList.remove('collapsed');
+      }
+  });
+}
+
+  
+function buildComfortLevelFilterEvents(element, availableArr) {
+
+  element.querySelectorAll(".fs-pfs-filter-option-item.fs-pfs-filter-option-label").forEach((pfsItem) => {
+    // No need to add click event on not available items
+    // if (
+    //   !availableArr.includes(pfsItem.querySelector(".fs-pfs-filter-option-value").innerHTML) &&
+    //   !availableArr.includes("Comfort Level " + pfsItem.querySelector(".fs-pfs-filter-option-value").innerHTML)
+    // ) {
+    //   return;
+    // }
+
+    pfsItem.addEventListener("click", () => {
+      console.log(pfsItem);
+      // Get the innerHTML of the clicked item's value
+      const value = pfsItem.querySelector(".fs-pfs-filter-option-value").innerHTML;
+
+      // Toggle selection
+      if (pfsItem.classList.contains("selected")) {
+        pfsItem.classList.remove("selected");
+      } else {
+        pfsItem.classList.add("selected");
+      }
+
+        // Find the corresponding element with the matching text
+        const correspondingElement = Array.from(element.querySelectorAll('#fs_filter_comfort\\ level .filters-option-text.fs-serp-filter-text'))
+            .find(element => element.textContent.includes(value));
+        // If a matching element is found, trigger a click on it
+        if (correspondingElement) {
+            correspondingElement.closest('.checkbox.fs-checkbox').querySelector('input[type="checkbox"]').click();
+        }
+    });
+  });
+}
+
+
+
+function findVariantID(firstVariant,secondVariant,data,firstName,secondName,color)
+{
+  var filteredData=data;
+  if(color)
+  {
+    filteredData=filteredData.filter(variant=>(variant["attributes"]["Color"] && variant["attributes"]["Color"].toLowerCase()==color.toLowerCase()) ||
+      (variant["attributes"]["Colour"] && variant["attributes"]["Colour"].toLowerCase()==color.toLowerCase()) ||
+      (variant["attributes"]["Base colour"] && variant["attributes"]["Base colour"].toLowerCase()==color.toLowerCase())
+                                    );
+    if(filteredData.length==1)
+    {
+      return filteredData[0];
+    }
+  }
+  if(firstName)
+  {
+    filteredData=filteredData.filter(variant=>variant["attributes"][firstName]==firstVariant);
+    if(filteredData.length==1 && !secondName)
+    {
+      return filteredData[0];
+    }
+  }
+  if(secondName)
+  {
+    filteredData=filteredData.filter(variant=>variant["attributes"][secondName]==secondVariant);
+    if(filteredData.length==1)
+    {
+      return filteredData[0];
+    }
+  }
+
+  if(filteredData.length>0)
+    return filteredData[0];
+  
+}
+
+
+function manualATC(atcButton,productElement,data,firstName,secondName) 
+{
+    atcButton.addEventListener('click',async ()=>
+    {
+      var firstVariant="";
+      var secondVariant="";
+      var selectElements=productElement.querySelectorAll(".fs-dropdown-select");
+      if(selectElements.length>0)
+      {
+        firstVariant=selectElements[0].value;
+        if(selectElements.length>1)
+        {
+          secondVariant=selectElements[1].value;
+        }
+      }
+      var color=productElement.querySelector(".color-swatch.selected");
+      if(color)
+      {
+        if(color.title)
+        {
+           color=color.title;         
+        }
+        else if(color.closest(".color-swatch-container") && color.closest(".color-swatch-container").querySelector(".color-swatch-color-name"))
+        {
+          color=color.closest(".color-swatch-container").querySelector(".color-swatch-color-name").innerHTML;
+        }
+
+      }
+
+      var variantId=findVariantID(firstVariant,secondVariant,data,firstName,secondName,color);
+      if(!variantId)
+      {
+          return;
+      }
+      atcButton.querySelector(".add-to-cart-spinner-text-wrapper span").innerHTML="Adding...";
+      await addToCartAjax(variantId.id,1);
+      atcButton.querySelector(".add-to-cart-spinner-text-wrapper span").innerHTML="Added!";
+      setTimeout(() => 
+        {
+          atcButton.querySelector(".add-to-cart-spinner-text-wrapper span").innerHTML="Add to Cart";
+        }, 3000);
+      
+    });
+}
+
+/* add sale label */
+function addsaleLabel(productElement, data) {
+    const save = Math.round((data.comparePrice - data.price)).toLocaleString();
+    if (productElement.querySelectorAll(`.my-promo-labels`).length === 0) {
+      productElement.querySelector(".info-container").insertAdjacentHTML('beforeend', `<div class="my-promo-labels">SAVE $${save}</div>`);
+    }
+}
+
+
+function setProductSpecialPriceAC(productElement, data){
+    let priceElement = productElement.querySelector('.actual-price:not(.cloned)');
+    let compareElement = productElement.querySelector('.compare:not(.cloned)');
+       
+    if(priceElement) {
+      // Update the element with the new string
+      const clonedPrice=priceElement.cloneNode(true);
+      clonedPrice.textContent = priceElement.textContent.replace('NZ','').replace('.00','');
+      clonedPrice.classList.add("cloned");
+      if(productElement.querySelector('.actual-price.cloned'))
+      {
+        productElement.querySelector('.actual-price.cloned').remove();
+      }
+      productElement.querySelector('.price').appendChild(clonedPrice);
+    }
+    
+    if(compareElement) {
+      // Update the element with the new string
+      const clonedComparePrice=compareElement.cloneNode(true);
+      clonedComparePrice.textContent = compareElement.textContent.replace('NZ','').replace('.00','');
+      clonedComparePrice.classList.add("cloned");
+      if(productElement.querySelector('.compare.cloned'))
+      {
+        productElement.querySelector('.compare.cloned').remove();
+      }
+      productElement.querySelector('.price').appendChild(clonedComparePrice);
+    }
+  
+    //formating prices
+  const priceElements = productElement.querySelectorAll('.actual-price.cloned');
+  priceElements.forEach(function (element) {
+    const originalText = element.textContent;
+    const numberPattern = /(\d+(\.\d{1,2})?)/;
+    const match = originalText.match(numberPattern);
+
+    if (match) {
+      const price = parseFloat(match[1]); // Extract and convert the price to a float
+      const formattedPrice = price.toLocaleString('en-US'); // Format the price
+
+      const newText = originalText.replace(numberPattern, formattedPrice);
+      element.textContent = newText;
+    }
+  });
+
+  const compareElements = productElement.querySelectorAll('.compare.cloned');
+  compareElements.forEach(function (element) {
+    const originalText = element.textContent;
+    const numberPattern = /(\d+(\.\d{1,2})?)/;
+    const match = originalText.match(numberPattern);
+
+    if (match) {
+      const price = parseFloat(match[1]); // Extract and convert the price to a float
+      const formattedPrice = price.toLocaleString('en-US'); // Format the price
+      
+
+      var newText = originalText.replace(numberPattern, formattedPrice);
+      newText=newText.replace("D","");
+      element.textContent = newText;
+    }
+  });
+}  
+
+function setProductSpecialPrice(productElement, data){
+    NewBadges.set(data, productElement);
+    let priceElement = productElement.querySelector('.price, .fs-price');
+    let compareElement = productElement.querySelector('.compare, .fs-price.compare');
+       
+    if(priceElement) {
+      // Update the element with the new string
+      priceElement.textContent = priceElement.textContent.replace('NZ','').replace('.00','');
+    }
+    
+    if(compareElement) {
+      // Update the element with the new string
+      compareElement.textContent = compareElement.textContent.replace('NZ','').replace('.00','');
+    }
+  
+    //formating prices
+  const priceElements = productElement.querySelectorAll('.price');
+  priceElements.forEach(function (element) {
+    const originalText = element.textContent;
+    const numberPattern = /(\d+(\.\d{1,2})?)/;
+    const match = originalText.match(numberPattern);
+
+    if (match) {
+      const price = parseFloat(match[1]); // Extract and convert the price to a float
+      const formattedPrice = price.toLocaleString('en-US'); // Format the price
+
+      const newText = originalText.replace(numberPattern, formattedPrice);
+      element.textContent = newText;
+    }
+  });
+
+  const compareElements = productElement.querySelectorAll('.compare');
+  compareElements.forEach(function (element) {
+    const originalText = element.textContent;
+    const numberPattern = /(\d+(\.\d{1,2})?)/;
+    const match = originalText.match(numberPattern);
+
+    if (match) {
+      const price = parseFloat(match[1]); // Extract and convert the price to a float
+      const formattedPrice = price.toLocaleString('en-US'); // Format the price
+      
+
+      var newText = originalText.replace(numberPattern, formattedPrice);
+      newText=newText.replace("D","");
+      element.textContent = newText;
+    }
+  });
+}  
+
+function checkingAvialiblityWhen2Dropdowns(productElement,variants,firstName,secondName,firstSelectFlag=false)
+{
+  var color=productElement.querySelector(".color-swatch.selected");
+  if(color)
+  {
+    color=color.title;
+  }
+  else if(productElement.querySelector(".color-swatch-color-name"))
+  {
+    color=productElement.querySelector(".color-swatch-color-name").innerHTML;
+  }
+  var firstVariant="";
+  const selectElements = productElement.querySelectorAll('.fs-variants-container select');
+  const selectElement=productElement.querySelectorAll('.fs-variants-container select.first_dropdown');
+  //checking avialiblity only for first select ,only if there is 2 dropdown , checking the second
+    if(selectElement && selectElements.length>1)
+    {
+      firstVariant=selectElements[0].value;
+      var firstselected=false;
+      productElement.querySelectorAll('.fs-variants-container select:not(.first_dropdown) option').forEach((secondDropDownOption)=>{
+        if(findVariantID(firstVariant,secondDropDownOption.value,variants,firstName,secondName,color))
+        {
+          secondDropDownOption.disabled=false;            
+          if (!secondDropDownOption.disabled && !firstselected && firstSelectFlag) {
+              // Select this option
+              secondDropDownOption.selected = true;
+              firstselected=true;
+          }
+        }
+        else{
+          secondDropDownOption.disabled=true;
+
+        }
+      }); 
+
+
+    }
+}
+
+function changePriceOnVariantChange(atcButton,productElement,variants,firstName,secondName)
+{
+  // Select the <select> element
+  const selectElements = productElement.querySelectorAll('.fs-variants-container select');
+  selectElements.forEach((selectElement)=>{
+    // Add event listener for the change event
+    selectElement.addEventListener('change', function() {
+      var firstVariant="";
+      var secondVariant="";
+      var selectElements=productElement.querySelectorAll(".fs-dropdown-select");
+      if(selectElements.length>0)
+      {
+        firstVariant=selectElements[0].value;
+        if(selectElements.length>1)
+        {
+          secondVariant=selectElements[1].value;
+        }
+      }
+      var color=productElement.querySelector(".color-swatch.selected");
+      if(color)
+      {
+        color=color.title;
+      }
+      else if(productElement.querySelector(".color-swatch-color-name"))
+      {
+        color=productElement.querySelector(".color-swatch-color-name").innerHTML;
+      }
+
+      if(selectElement.classList.contains("first_dropdown"))
+      {
+        //with preselection of the first availble variant, only for first selector
+        checkingAvialiblityWhen2Dropdowns(productElement,variants,firstName,secondName,firstSelectFlag=true);        
+      }
+      else{
+        checkingAvialiblityWhen2Dropdowns(productElement,variants,firstName,secondName);
+      }
+
+
+      var variantId=findVariantID(firstVariant,secondVariant,variants,firstName,secondName,color);
+
+      if(!variantId)
+      {
+          productElement.querySelector(".price").style.visibility= "hidden";
+          if(productElement.querySelector(".compare"))
+          {
+            productElement.querySelector(".price").style.color= "#009cde";
+            productElement.querySelector(".compare").style.visibility= "hidden";  
+            productElement.querySelector(".my-promo-labels").style.visibility= "hidden";
+          }
+          return;
+      }
+      if(variantId && variantId.attributes["formattedPrice"] && productElement.querySelector(".price"))
+      {
+        productElement.querySelector(".price").innerHTML=variantId.attributes["formattedPrice"];
+        productElement.querySelector(".price").style.visibility= "visible";
+      }
+      if(variantId && variantId.attributes["Compare at price"] && productElement.querySelector(".compare"))
+      {
+        productElement.querySelector(".compare").innerHTML=variantId.attributes["Compare at price"].replace(":","$");
+        productElement.querySelector(".price").style.color= "#d0021b";
+        productElement.querySelector(".compare").style.visibility= "visible";
+
+        const varPrice=parseInt(variantId.attributes["Price"].replace("NZD:",""));
+        const varComparePrice=parseInt(variantId.attributes["Compare at price"].replace("NZD:",""));
+        const save = Math.round(( varComparePrice - varPrice)).toLocaleString();
+          productElement.querySelector(".my-promo-labels").innerHTML=`SAVE $${save}`;
+        productElement.querySelector(".my-promo-labels").style.visibility= "visible";
+      }
+      else if(productElement.querySelector(".compare"))
+      {
+        productElement.querySelector(".price").style.color= "#009cde";
+        productElement.querySelector(".compare").style.visibility= "hidden";
+        productElement.querySelector(".my-promo-labels").style.visibility= "hidden";
+      }
+      setProductSpecialPrice(productElement, variants);
+
+
+    });
+  });
+}
+
+function swatchesEvents(atcButton,productElement,data,variants,firstName,secondName)
+{
+    productElement.querySelectorAll(".color-swatch-container").forEach((swatch)=>{
+      swatch.addEventListener("mouseover",()=>{
+        
+        setProductSpecialPrice(productElement, data);
+        productElement.querySelector(".selectedColor").innerHTML=swatch.querySelector(".color-swatch-color-name").innerHTML;
+        
+        
+      });
+      swatch.querySelector(".color-swatch").addEventListener("mouseenter",()=>{
+        setProductSpecialPrice(productElement, data);
+        
+      });
+      if(window.innerWidth>480)
+      {
+       swatch.addEventListener("click",()=>{
+          setProductSpecialPrice(productElement, data);
+          productElement.querySelector(".selectedColor").innerHTML=swatch.querySelector(".color-swatch-color-name").innerHTML;
+         
+        }); 
+      }
+      else
+      {
+        const observer = new MutationObserver((mutationsList, observer) => {
+        
+          for (const mutation of mutationsList) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+              setProductSpecialPrice(productElement, data);
+              // console.log("clicked swatch");
+              const swatchWrapper=productElement.querySelector(".color-swatch.selected").closest(".color-swatch-container");
+              productElement.querySelector(".selectedColor").innerHTML=swatchWrapper.querySelector(".color-swatch-color-name").innerHTML;
+              
+            }
+          }
+        });
+        const config = {
+          attributes: true, 
+          attributeFilter: ['class'], 
+          subtree: true 
+        };
+        // Start observing the parent element
+        observer.observe(swatch, config);
+      }           
+  });
+}
+
+function hooks() {
+    SerpOptions.registerHook('serp-filters', ({facets, element}) => {   
+        let filterheader = `<h5 class="fs_filter_head" style="font-size: 20px; margin: 0px;">Filter</h5>`;
+        // console.log('facets', facets);
+        if (element.querySelectorAll(`.fs_filter_head`).length === 0) {
+          element.insertAdjacentHTML('afterbegin', '<hr class="filter_divider">');        
+          element.insertAdjacentHTML('afterbegin', filterheader);        
+        }
+        
+        let comfortlevelelement = element.querySelector('#fs_filter_comfort\\ level');
+        // console.log('comfortlevelelement', comfortlevelelement);
+        if (comfortlevelelement) {
+          
+          buildcomfortlevelfilter(comfortlevelelement,facets);
+        }            
+        element.querySelectorAll('.category-container:not(#fs_filter_comfort\\ level) .fs-pfs-filter-option-content').forEach((old)=>{old.remove();});
+        if(window.location.href.indexOf("Comfort+level")==-1 && element.querySelector('.fs-pfs-filter-option-item.selected'))
+        {
+          element.querySelector('.fs-pfs-filter-option-item.selected').classList.remove("selected");
+        }
+      
+        // save selection for the Comfort Level after reloading the page
+        const comfortLevelCont = element.querySelector('#fs_filter_comfort\\ level');
+        if(comfortLevelCont) {
+          const checkboxes = comfortLevelCont.querySelectorAll('.checkbox.fs-checkbox');
+          
+          // Get all filter option items
+          const filterOptionItems = comfortLevelCont.querySelectorAll('.fs-pfs-filter-option-item.fs-pfs-filter-option-label');
+      
+          checkboxes.forEach((checkbox) => {
+            // Check if checkbox has the 'fs-selected-checkbox' class
+            if (checkbox.classList.contains('fs-selected-checkbox')) {
+              // Get the text of the checkbox label
+              const checkboxLabel = checkbox.querySelector('.fs-serp-filter-text').textContent.trim();
+              
+              // Find the corresponding filter option item by matching inner HTML
+              filterOptionItems.forEach((item) => {
+                const optionValue = item.querySelector('.fs-pfs-filter-option-value').textContent.trim();
+                const numberlabel = checkboxLabel.match(/\d+/)[0];
+                if (numberlabel==optionValue) {
+                  item.classList.add('selected');
+                }
+              });
+            }
+          });
+          // disabling comfort level options if filters applied
+          const resultCheckboxes = comfortLevelCont.querySelectorAll('.fs-checkbox');
+          if(filterOptionItems && resultCheckboxes) {
+            // Loop through each filter option item
+            filterOptionItems.forEach((item) => {
+              const optionValue = item.querySelector('.fs-pfs-filter-option-value').textContent.trim();
+              
+              // Check if there is a corresponding checkbox with the same label
+              const correspondingCheckbox = Array.from(resultCheckboxes).find(checkbox => {
+                const checkboxLabel = checkbox.querySelector('.fs-serp-filter-text').textContent.trim();
+                return checkboxLabel.includes(optionValue);
+              });
+            
+              if (correspondingCheckbox && item.classList.contains('disable')) {
+                // Remove 'disable' class if a corresponding element is found
+                item.classList.remove('disable');
+              } else if (!correspondingCheckbox && !item.classList.contains('disable')) {
+                // Add 'disable' class if no corresponding element is found
+                item.classList.add('disable');
+              }
+            });
+          }
+        }
+
+          //Drop the NZ on the price filter
+
+          const priceFilterContainer = element.querySelector('#fs-filter-collapsed-content-Price');
+      
+          const updateCurrencySymbol = (selector) => {
+            if(priceFilterContainer) {
+              const el = priceFilterContainer.querySelector(`${selector} .input-currency-symbol`);
+              if (el) {
+                  el.textContent = el.textContent.replace('NZ$', '$');
+              }
+            }
+          };
+      
+          updateCurrencySymbol('.slider-input-box-min');
+          updateCurrencySymbol('.slider-input-box-max');
+      });
+
+  
+    
+   SerpOptions.registerHook("serp-top-page", ({element, totalResults}) => {
+
+      const buttonShowFilters = `<div class="button-wrapper fs-result-page-o6j45c" style="--hide-filters-button-border:unset;--hide-filters-button-shadow:unset;--hide-filters-button-border-radius:unset;--hide-filters-button-font-family:TextaAlt-Medium, sans-serif;--hide-filters-button-color:unset;--hide-filters-button-spacing:0.25px;--hide-filters-button-font-size:14px;--hide-filters-button-font-weight:400;--hide-filters-button-background:unset"><div class="hide-filters-button fs-result-page-o6j45c">Hide Filters</div></div>`
+      const buttonShowFiltersWrap = document.createElement('div');
+      buttonShowFiltersWrap.classList.add('fs_btn_show_hide_filters_wrap_cstm')
+      buttonShowFiltersWrap.innerHTML = buttonShowFilters;
+      buttonShowFiltersWrap.addEventListener('click', function() {
+        // Trigger a click on the old button
+        const buttonWrapper = element.querySelector('.fs-top-right-buttons-wrapper .button-wrapper');
+        buttonWrapper.click();
+      
+        // Update the text of the new button
+        if(buttonShowFiltersWrap.querySelector('.hide-filters-button').innerText == 'Hide Filters') {
+          buttonShowFiltersWrap.querySelector('.hide-filters-button').innerText = 'Show Filters';
+        } else {
+          buttonShowFiltersWrap.querySelector('.hide-filters-button').innerText = 'Hide Filters'
+        }
+      })
+    // Select the container where it will be moved
+      const topCenterContainer = element.querySelector('.top-center-container');
+
+      if (element.parentNode && element.parentNode.querySelectorAll('.fs_btn_show_hide_filters_wrap_cstm').length == 0) {
+         element.parentNode.appendChild(buttonShowFiltersWrap);
+        element.parentNode.classList.add('fs_parent_cstm');
+      }
+
+    });
+    
+
+  
+ 
+    SerpOptions.registerHook('serp-product-grid', async ({products, element}) => {
+        //console.log('data', products);
+        for (const productElement of getProductElements(element)) {
+            /* get product data */
+            const productID = productElement.dataset.productId;
+            const data = products[productID];
+            if ( typeof(data) !== "undefined" && data !== null ) {
+              setProductSpecialPrice(productElement, data);
+
+              // get product type
+              var productype = Getattributevalue(data.attributes,"Type");
+              
+              // add badges
+              NewBadges.set(data, productElement);
+
+              // add sale label
+              if( parseFloat(data.comparePrice) > 0 && parseFloat(data.comparePrice) > parseFloat(data.price) ){
+                addsaleLabel(productElement, data)
+              }
+              
+              if (productElement.querySelectorAll(`.fs-variants-container`).length === 0) {                                                                                                  
+                  const newElement = document.createElement('div');
+                  newElement.classList.add('fs-variants-container');
+                  productElement.querySelector(".info-container").insertAdjacentElement('afterend', newElement);
+              }
+
+              //case where there is only one color
+              const colorSet=new Set();
+              if(data["variants"])
+              {
+                data["variants"].forEach((variant)=>{
+                  if(variant["attributes"] && variant["attributes"]["Colour"])
+                  {
+                    colorSet.add(variant["attributes"]["Colour"]);
+                  }
+                  if(variant["attributes"] && variant["attributes"]["Base colour"])
+                  {
+                    colorSet.add(variant["attributes"]["Base colour"]);
+                  }
+                });
+              }
+              if(colorSet.size==1 && productElement.querySelector(".color-swatches") && !productElement.querySelector(".color-swatch-container"))
+              {
+                var colorName="";
+                [...colorSet.entries()].forEach((color)=>{
+                  colorName=color[0].toLowerCase();
+                });
+                const colorSwatchElement=`<span class="color-swatch-container fs-color-swatch-container">
+                <span class="color-swatch fast-swatch-color-fallback fast-swatch-color-${colorName} isp-product-color-swatch-${colorName} selected" style="--swatch-width:25px;--swatch-height:25px" data-disabled="false" >
+                <div class="fs-serp-tooltip" style="border: 1px solid black; box-shadow: black 1px 1px 1px; background: black; border-radius: 4px; padding: 4px; font-size: 12px; position: absolute; top: 31px; left: 26px; color: white; z-index: 10000000; min-width: 62px; display:none;">${colorName}</div>
+                </span> 
+                <span class="color-swatch-color-name fs-color-name">${colorName}</span>
+                </span>`;
+                productElement.querySelector(".color-swatches").insertAdjacentHTML('afterbegin', colorSwatchElement);
+
+              }
+
+
+              //add swatches color label for the selected one
+              if(productElement.querySelector(".color-swatch")  && !productElement.querySelector(".color-swatches-wrapper .selectedLabel"))
+              {
+                const selectedLabel=document.createElement("div");
+                selectedLabel.classList.add("selectedLabel");
+                const colorText=document.createElement("div");
+                colorText.classList.add("colorText");
+                colorText.innerHTML="Colour: ";
+                if(productype && productype==="type ensemble")
+                {
+                    colorText.innerHTML="Base Colour: ";
+                }
+                const selectedColor=document.createElement("div");
+                selectedColor.classList.add("selectedColor");
+                if(productElement.querySelector(".color-swatch.selected"))
+                {
+                  const swatchWrapper=productElement.querySelector(".color-swatch.selected").closest(".color-swatch-container");
+                  selectedColor.innerHTML=swatchWrapper.querySelector(".color-swatch-color-name").innerHTML;
+                }
+                else if(productElement.querySelector(".color-swatch-color-name"))
+                {
+                  await productElement.querySelector(".color-swatch").click();
+                  selectedColor.innerHTML=productElement.querySelector(".color-swatch-color-name").innerHTML;
+                  if(productElement.querySelector(".price") && productElement.querySelector(".price").innerHTML.indexOf("From ")==-1)
+                  {
+                    productElement.classList.add("first-from-add");
+                    productElement.querySelector(".price").innerHTML="From "+productElement.querySelector(".price").innerHTML;
+                  }
+                }
+
+                selectedColor.style.textTransform = "capitalize";
+                
+                selectedLabel.appendChild(colorText);
+                selectedLabel.appendChild(selectedColor);
+                if(!productElement.querySelector(".selectedLabel"))
+                {
+                   productElement.querySelector(".color-swatches-wrapper").insertBefore(selectedLabel,productElement.querySelector(".color-swatches-wrapper").firstChild);                 
+                }
+
+
+              }
+              
+
+              // Extract unique variants
+              var comfortLevels = new Set();
+              var sizes = new Set();
+              var drawerlayout = new Set();
+              var weights = new Set();
+              var depths = new Set(); 
+              var feel = new Set(); 
+
+              if (data.variants.length > 0){
+                data.variants.forEach(function(variant) {
+                    comfortLevels.add(variant.attributes["Comfort level"]);
+                    sizes.add(variant.attributes["Size"]);
+                    drawerlayout.add(variant.attributes["Drawer layout"]);
+                    weights.add(variant.attributes["Weight (gsm)"]);
+                    depths.add(variant.attributes["Depth"]);
+                    feel.add(variant.attributes["Feel"]);
+                });  
+
+                let variantsContainer = productElement.querySelector('.fs-variants-container');
+
+                // Create and append the Size drop-down                               
+                if (productype === "type mattress" || productype === "type ensemble"){
+                  createDropdown(productElement, Array.from(sizes), 'size', 'Size' , 'first_dropdown'); 
+                  createDropdown(productElement, Array.from(comfortLevels), 'comfortLevel', 'Comfort Level');
+                  //add to cart
+                  manualATC(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data.variants,'Size','Comfort level');
+                  //change variant event
+                  changePriceOnVariantChange(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data.variants,'Size','Comfort level');
+                  //add hover event for swatches to change price and label of selected color
+                  swatchesEvents(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data,data.variants,'Size','Comfort level');
+                  
+                  //first select availiblity check
+                  checkingAvialiblityWhen2Dropdowns(productElement,data.variants,'Size','Comfort level');
+                  if (variantsContainer) {
+                    variantsContainer.classList.add('two-options');
+                  }
+                }                                
+                else if (productype === "type drawer bases") {
+                  createDropdown(productElement, Array.from(sizes), 'size', 'Size', 'first_dropdown'); 
+                  createDropdown(productElement, Array.from(drawerlayout), 'drawerlayout', 'Drawer layout');
+                  //add to cart
+                  manualATC(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data.variants,'Size','Drawer layout');
+                  //change variant event
+                  changePriceOnVariantChange(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data.variants,'Size','Drawer layout');
+                  //add hover event for swatches to change price and label of selected color
+                  swatchesEvents(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data,data.variants,'Size','Drawer layout');
+                  //first select availiblity check
+                  checkingAvialiblityWhen2Dropdowns(productElement,data.variants,'Size','Drawer layout');
+                  if (variantsContainer) {
+                    variantsContainer.classList.add('two-options');
+                  }
+                }
+                else if (productype === "type sheet set") {
+                  createDropdown(productElement, Array.from(sizes), 'size', 'Size', 'first_dropdown'); 
+                  createDropdown(productElement, Array.from(depths), 'depth', 'Depth');
+                  //add to cart
+                  manualATC(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data.variants,'Size','Depth'); 
+                  //change variant event
+                  changePriceOnVariantChange(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data.variants,'Size','Depth');
+                  //add hover event for swatches to change price and label of selected color
+                  swatchesEvents(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data,data.variants,'Size','Depth');
+                  //first select availiblity check
+                  checkingAvialiblityWhen2Dropdowns(productElement,data.variants,'Size','Depth');
+                  if (variantsContainer) {
+                    variantsContainer.classList.add('two-options');
+                  }
+                }                
+                else if (productype === "type duvet") {
+                  createDropdown(productElement, Array.from(sizes), 'size', 'Size', 'first_dropdown'); 
+                  createDropdown(productElement, Array.from(weights), 'weight', 'Weight (gsm)');
+                  //add to cart
+                  manualATC(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data.variants,'Size','Weight (gsm)'); 
+                  //change variant event
+                  changePriceOnVariantChange(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data.variants,'Size','Weight (gsm)');
+                  //add hover event for swatches to change price and label of selected color
+                  swatchesEvents(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data,data.variants,'Size','Weight (gsm)');
+                  //first select availiblity check
+                  checkingAvialiblityWhen2Dropdowns(productElement,data.variants,'Size','Weight (gsm)');
+                  if (variantsContainer) {
+                    variantsContainer.classList.add('two-options');
+                  }
+                }
+                else if (productype === "type pillow") {
+                  createDropdown(productElement, Array.from(feel), 'feel', 'Feel');
+                  //add to cart
+                  manualATC(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data.variants,'Feel',null);  
+                  //change variant event
+                  changePriceOnVariantChange(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data.variants,'Feel',null);
+                  //add hover event for swatches to change price and label of selected color
+                  swatchesEvents(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data,data.variants,'Feel',null);
+                }
+                else if ((productype === "type bundle") || (productype === "type headboards") || ( productype === "type headboard") || (productype==="type pillow protector") || (productype==="type mattress protector") || (productype==="type bases")) {
+                  createDropdown(productElement, Array.from(sizes), 'size', 'Size');
+                  //add to cart
+                  manualATC(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data.variants,'Size',null);  
+                  //change variant event
+                  changePriceOnVariantChange(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data.variants,'Size',null);
+                  //add hover event for swatches to change price and label of selected color
+                  swatchesEvents(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data,data.variants,'Size',null);
+                }
+                else if (productype === "type base-nosale") {
+                  //not sellable items
+                  productElement.querySelector(".add-to-cart-button-wrapper").style.display="none";
+                  
+                }
+                else{
+                  manualATC(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data.variants,null,null); 
+                  //change variant event
+                  changePriceOnVariantChange(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data.variants,null,null);
+                  //add hover event for swatches to change price and label of selected color
+                  swatchesEvents(productElement.querySelector(".add-to-cart-button-wrapper"),productElement,data,data.variants,null,null);
+                }
+
+                // Check the number of dropdowns and add the appropriate class
+                const dropdownCount = variantsContainer.querySelectorAll('select').length;
+                if (dropdownCount === 2) {
+                    variantsContainer.classList.add('two-options');
+                    variantsContainer.classList.remove('one-option');
+                } else if (dropdownCount === 1) {
+                    variantsContainer.classList.add('one-option');
+                    variantsContainer.classList.remove('two-options');
+                }
+
+              }
+
+              //first change event to set currect prices for the first variant that set in the dropdowns
+              if(!productElement.classList.contains("first-dropdown-event") && productElement.querySelector(".fs-dropdown-select"))
+              {
+                productElement.classList.add("first-dropdown-event");
+                // Create and dispatch a 'change' event
+                const event = new Event('change', {
+                    bubbles: true, // Allows the event to bubble up
+                    cancelable: true // Allows the event to be canceled
+                });
+    
+                productElement.querySelector(".fs-dropdown-select").dispatchEvent(event);
+              }
+              //add FROM to Price
+              if(!productElement.classList.contains("first-from-add") && productElement.querySelector(".price") && productElement.querySelector(".price").innerHTML.indexOf("From ")==-1)
+              {
+                productElement.classList.add("first-from-add");
+                productElement.querySelector(".price").innerHTML="From "+productElement.querySelector(".price").innerHTML;
+              }
+
+            }
+        }
+
+
+        
+
+    });
+      SerpOptions.registerHook('serp-removable-tags', ({data, element}) => {
+        let clearAllBtn = element.querySelector('.clear-all-button');
+        let parent = element.closest('#fs-serp-page');
+        let comfortLevelFiltersWrap = parent.querySelector('.fs-pfs-filter-option-content-inner');
+        if(clearAllBtn && comfortLevelFiltersWrap) {
+          clearAllBtn.addEventListener('click', () => {
+            comfortLevelFiltersWrap.querySelectorAll('.fs-pfs-filter-option-item').forEach(filter => {
+              filter.classList.remove("selected");
+            })
+          })
+        }
+      // Function to handle removal of a tag and corresponding filter
+      function handleTagRemoval(event) {
+        const removeButton = event.currentTarget;
+        const tag = removeButton.closest('.removable-tag');
+        const tagText = tag.querySelector('.removable-tag-text').textContent.trim();
+      
+        // Remove the tag from the UI
+        tag.remove();
+      
+        // Find and deselect the corresponding filter option
+        const filterOptions = parent.querySelectorAll('.fs-pfs-filter-option-item');
+        filterOptions.forEach(filter => {
+          const filterValue = filter.querySelector('.fs-pfs-filter-option-value').textContent.trim();
+          if (filterValue === tagText) {
+            filter.classList.remove('selected');
+          }
+        });
+      }
+      
+      // Attach event listeners to all removable tag remove buttons
+      element.querySelectorAll('.removable-tag-remove-button').forEach(button => {
+        button.addEventListener('click', () => {
+          const tag = button.closest('.removable-tag');
+          const tagText = tag.querySelector('.removable-tag-text').textContent.trim();
+        
+          // Find and deselect the corresponding filter option
+          const filterOptions = parent.querySelectorAll('.fs-pfs-filter-option-item');
+          filterOptions.forEach(filter => {
+            const filterValue = filter.querySelector('.fs-pfs-filter-option-value').textContent.trim();
+            if (`Comfort Level ${filterValue}` === tagText) {
+              filter.classList.remove('selected');
+            }
+          });
+          //prevent animation
+          if(button.closest('.removable-tag') && button.closest('.removable-tag').parentNode) {
+            button.closest('.removable-tag').parentNode.style.display = 'none';
+          }
+        });
+      });
+    });
+}
+
+// execution here
+if (window.SerpOptions) {
+    hooks();
+} else {
+   window.addEventListener('fast-serp-ready', function () {
+       hooks();
+   });
+}
+
+
+function AChooks() {
+    FastAutocomplete.registerHook('render-autocomplete-product-item', ({product, index, element}) => {
+          //Set up special prices
+          let productTitle = product.u || '';
+          let productID = product.id;
+          
+          //Set up special prices
+          setProductSpecialPriceAC(element, product);
+    });
+}
+
+
+if (window.FastAutocomplete) {
+    AChooks();
+} else {
+    window.addEventListener('fast-autocomplete-ready', function () {
+        AChooks();
+    });
+}
+
+
+  
+
+//end for Vnext
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(function() {
+    const searchInput = document.querySelector('#boost-pfs-search-box-0');
+    const searchButton = document.querySelector('.search__button.field__button');
+     if(searchInput && searchButton) {
+        function toggleButtonState() {
+          if (searchInput.value.trim() === '') {
+            searchButton.disabled = true;            
+          } else {
+            searchButton.disabled = false;
+          }
+        }
+      
+        searchInput.addEventListener('input', toggleButtonState);
+      
+        // Initialize button state based on the current input value
+        toggleButtonState();
+      }
+  }, 5000)
+});
+</script>
+
+
+<style>
+
+  fieldset.js.product-form__input input[type=radio].disabled+label{
+    display: none !important;
+  }
+
+   body.gradient {
+    height: unset !important;
+}
+
+</style>
