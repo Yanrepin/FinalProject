@@ -67,7 +67,7 @@ const NewBadges = {
         }
 
       
-        if(product && NewBadges.isOnSale(product))
+         if(product && NewBadges.isOnSale(product))
         {
           var discountPrice = ( parseFloat(product.comparePrice) - parseFloat(product.price) ) / parseFloat(product.comparePrice);
           var DiscountRoundOff = Math.floor(((Math.round((discountPrice * 100 )) / 100) / 5) * 100) * 5;
@@ -121,11 +121,11 @@ const NewBadges = {
     },
 
 
-    addLabel: (productElement, promolabel ) => {      
+    addLabel: (productElement, promolabel ,flag=false) => {      
         productElement.querySelector(".fs-badges-wrapper").insertAdjacentHTML('afterBegin', promolabel);      
     },
     addImageLabel: (productElement, promolabel ) => {      
-        productElement.querySelector(".fs-badges-wrapper").insertAdjacentHTML('beforeBegin', promolabel);      
+        productElement.querySelector(".image-wrapper").insertAdjacentHTML('beforeBegin', promolabel);      
     },
 
     isSoldOut: (product) => {
@@ -507,7 +507,7 @@ function setProductSpecialPriceAC(productElement, data){
     const match = originalText.match(numberPattern);
 
     if (match) {
-      const price = parseFloat(match[1]); // Extract and convert the price to a float
+      const price = Math.floor(parseFloat(match[1])); // Extract and convert the price to a float
       const formattedPrice = price.toLocaleString('en-US'); // Format the price
 
       const newText = originalText.replace(numberPattern, formattedPrice);
@@ -522,7 +522,7 @@ function setProductSpecialPriceAC(productElement, data){
     const match = originalText.match(numberPattern);
 
     if (match) {
-      const price = parseFloat(match[1]); // Extract and convert the price to a float
+      const price = Math.floor(parseFloat(match[1])); // Extract and convert the price to a float
       const formattedPrice = price.toLocaleString('en-US'); // Format the price
       
 
@@ -556,7 +556,7 @@ function setProductSpecialPrice(productElement, data){
     const match = originalText.match(numberPattern);
 
     if (match) {
-      const price = parseFloat(match[1]); // Extract and convert the price to a float
+      const price = Math.floor(parseFloat(match[1])); // Extract and convert the price to a float
       const formattedPrice = price.toLocaleString('en-US'); // Format the price
 
       const newText = originalText.replace(numberPattern, formattedPrice);
@@ -571,7 +571,7 @@ function setProductSpecialPrice(productElement, data){
     const match = originalText.match(numberPattern);
 
     if (match) {
-      const price = parseFloat(match[1]); // Extract and convert the price to a float
+      const price = Math.floor(parseFloat(match[1])); // Extract and convert the price to a float
       const formattedPrice = price.toLocaleString('en-US'); // Format the price
       
 
@@ -750,8 +750,10 @@ function swatchesEvents(atcButton,productElement,data,variants,firstName,secondN
 }
 
 function hooks() {
-    SerpOptions.registerHook('serp-filters', ({facets, element}) => {   
-        let filterheader = `<h5 class="fs_filter_head" style="font-size: 20px; margin: 0px;">Filter</h5>`;
+    SerpOptions.registerHook('serp-filters', ({facets, element}) => {  
+
+      
+        let filterheader = `<h5 class="fs_filter_head" style="font-size: 20px; margin: 0px;">Filters</h5>`;
         // console.log('facets', facets);
         if (element.querySelectorAll(`.fs_filter_head`).length === 0) {
           element.insertAdjacentHTML('afterbegin', '<hr class="filter_divider">');        
@@ -818,8 +820,8 @@ function hooks() {
           }
         }
 
+      
           //Drop the NZ on the price filter
-
           const priceFilterContainer = element.querySelector('#fs-filter-collapsed-content-Price');
       
           const updateCurrencySymbol = (selector) => {
@@ -833,6 +835,18 @@ function hooks() {
       
           updateCurrencySymbol('.slider-input-box-min');
           updateCurrencySymbol('.slider-input-box-max');
+
+          //change the text from Color family to Colour family
+          const colorFilterContainer = element.querySelector('#fs_filter_color\\ family');
+          if (colorFilterContainer) {
+              const titleElement = colorFilterContainer.querySelector('span');
+              if (titleElement) {
+                  titleElement.textContent = 'Colour'; // Change "Color Family" to "Colour"
+              }
+          }
+
+
+          
       });
 
   
@@ -843,7 +857,8 @@ function hooks() {
       const buttonShowFiltersWrap = document.createElement('div');
       buttonShowFiltersWrap.classList.add('fs_btn_show_hide_filters_wrap_cstm')
       buttonShowFiltersWrap.innerHTML = buttonShowFilters;
-      buttonShowFiltersWrap.addEventListener('click', function() {
+      buttonShowFiltersWrap.addEventListener('click', function(event) {
+        event.preventDefault();
         // Trigger a click on the old button
         const buttonWrapper = element.querySelector('.fs-top-right-buttons-wrapper .button-wrapper');
         buttonWrapper.click();
@@ -861,6 +876,7 @@ function hooks() {
       if (element.parentNode && element.parentNode.querySelectorAll('.fs_btn_show_hide_filters_wrap_cstm').length == 0) {
          element.parentNode.appendChild(buttonShowFiltersWrap);
         element.parentNode.classList.add('fs_parent_cstm');
+
       }
 
     });
@@ -869,6 +885,7 @@ function hooks() {
   
  
     SerpOptions.registerHook('serp-product-grid', async ({products, element}) => {
+
         //console.log('data', products);
         for (const productElement of getProductElements(element)) {
             /* get product data */
@@ -947,14 +964,26 @@ function hooks() {
                 }
                 else if(productElement.querySelector(".color-swatch-color-name"))
                 {
-                  await productElement.querySelector(".color-swatch").click();
+
+                  const mouseEnterEvent = new MouseEvent('mouseenter', {
+                      bubbles: true,
+                      cancelable: true,
+                      view: window
+                  });
+                  await productElement.querySelector(".color-swatch").dispatchEvent(mouseEnterEvent);
+                  
+                  
                   selectedColor.innerHTML=productElement.querySelector(".color-swatch-color-name").innerHTML;
-                  if(productElement.querySelector(".price") && productElement.querySelector(".price").innerHTML.indexOf("From ")==-1)
+                  if(productElement.querySelector(".price") && productElement.querySelector(".price").innerHTML.indexOf("From ")==-1 && data && data.variants)
                   {
                     productElement.classList.add("first-from-add");
-                    productElement.querySelector(".price").innerHTML="From "+productElement.querySelector(".price").innerHTML;
+                    if(data.variants.filter(variant=>variant.attributes["Sellable"]==true) && data.variants.filter(variant=>variant.attributes["Sellable"]).length>1)
+                    {
+                       productElement.querySelector(".price").innerHTML="From "+productElement.querySelector(".price").innerHTML;
+                    }
                   }
                 }
+
 
                 selectedColor.style.textTransform = "capitalize";
                 
@@ -1107,10 +1136,13 @@ function hooks() {
                 productElement.querySelector(".fs-dropdown-select").dispatchEvent(event);
               }
               //add FROM to Price
-              if(!productElement.classList.contains("first-from-add") && productElement.querySelector(".price") && productElement.querySelector(".price").innerHTML.indexOf("From ")==-1)
+              if(!productElement.classList.contains("first-from-add") && productElement.querySelector(".price") && productElement.querySelector(".price").innerHTML.indexOf("From ")==-1 && data && data.variants)
               {
                 productElement.classList.add("first-from-add");
-                productElement.querySelector(".price").innerHTML="From "+productElement.querySelector(".price").innerHTML;
+                if(data.variants.filter(variant=>variant.attributes["Sellable"]==true) && data.variants.filter(variant=>variant.attributes["Sellable"]).length>1)
+                {
+                   productElement.querySelector(".price").innerHTML="From "+productElement.querySelector(".price").innerHTML;
+                }
               }
 
             }
@@ -1227,7 +1259,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   }, 5000)
 });
+
+
+
 </script>
+
+
+
 
 
 <style>
